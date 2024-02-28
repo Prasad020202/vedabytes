@@ -7,7 +7,7 @@ import Services from "./components/Services/Services";
 import Banner from "./components/Banner/Banner";
 import Partners from "./components/Partners/Partners.jsx";
 
-import headphone from "./assets/hero/headphone.png";
+import Laptop from "./assets/hero/5.png";
 import smartwatch2 from "./assets/category/smartwatch2-removebg-preview.png";
 
 import Products from "./components/Products/Products";
@@ -17,11 +17,13 @@ import Popup from "./components/Popup/Popup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import Test from "./components/Test.jsx"
+
 const BannerData = {
   discount: "Bestsellers",
   title: "Refurbished Laptops",
   date: "This Month",
-  image: headphone,
+  image: Laptop,
   title2: "Bestselling laptops for this month , grab this opportunity fast",
   title3: "Summer Sale",
   title4:
@@ -73,6 +75,7 @@ const App = () => {
       <Products />
       <Blogs />
       <Partners />
+      <Test/>
       <Footer />
       <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
     </div>

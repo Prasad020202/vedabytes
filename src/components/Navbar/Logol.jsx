@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import logo from "../../assets/logol.png";
 const LogoText =styled.h1`
 
 
@@ -24,7 +25,7 @@ const Logo = () => {
   return (
     <LogoText>
 
-        VEDA
+        <img src={logo} alt="" />
     </LogoText>
   )
 }

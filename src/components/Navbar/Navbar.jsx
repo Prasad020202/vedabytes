@@ -354,9 +354,9 @@ const Navigation = () => {
         </HamburgerMenu>
         <Menu click={click} >
           <MenuItems onClick={() => scrollTo('Home')}>Best Sellers</MenuItems>
-          <MenuItems onClick={() => scrollTo('About')}>Refurbished Laptops</MenuItems>
-          <MenuItems onClick={() => scrollTo('Roadmap')}>Refurbished Printers</MenuItems>
-          <MenuItems onClick={() => scrollTo('Roadmap')}>Refurbished Desktops</MenuItems>
+          <MenuItems onClick={() => scrollTo('About')}>Laptops</MenuItems>
+          <MenuItems onClick={() => scrollTo('Roadmap')}>Printers</MenuItems>
+          <MenuItems onClick={() => scrollTo('Roadmap')}>Desktops</MenuItems>
           <MenuItems onClick={() => scrollTo('Roadmap')}>Accessories</MenuItems>
           <MenuItems>
           <div className="mobile">
