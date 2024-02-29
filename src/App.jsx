@@ -76,9 +76,8 @@ const App = () => {
       <Banner data={BannerData} />
       {/* <Products /> */}
       <ProductCard/>
-
-      <Blogs />
       <Partners />
+      <Blogs />
       {/* <Test/> */}
       <Footer />
       <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />

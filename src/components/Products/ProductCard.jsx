@@ -278,8 +278,8 @@ const ProductCard = () => {
 
 
   return (
-    <div className="mb-10">
-     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 place-items-center">
+    <div className="mb-10 mx-28">
+     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 place-items-center">
       <ProductTemplate/>
       <ProductTemplate/>
       <ProductTemplate/>

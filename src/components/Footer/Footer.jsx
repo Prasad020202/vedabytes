@@ -7,21 +7,45 @@ import {
   FaLocationArrow,
 } from "react-icons/fa6";
 
+import logo from "../../assets/Logol.png"
+import payment from "../../assets/payment_img.png"
+import { IoIosMail } from "react-icons/io";
+import Faq from "../FAQ/Faq";
+
 const FooterLinks = [
+  {
+    title: "Laptops",
+    link: "/#",
+  },
+  {
+    title: "Desktop",
+    link: "/#about",
+  },
+  {
+    title: "Printers",
+    link: "/#contact",
+  },
+  {
+    title: "Accessories",
+    link: "/#blog",
+  },
+];
+
+const FooterLinks1 = [
   {
     title: "Home",
     link: "/#",
   },
   {
-    title: "About",
+    title: "Best Sellers",
     link: "/#about",
   },
   {
-    title: "Contact",
+    title: "Testimonials",
     link: "/#contact",
   },
   {
-    title: "Blog",
+    title: "Brands",
     link: "/#blog",
   },
 ];
@@ -38,22 +62,13 @@ const Footer = () => {
               className="text-primary font-semibold tracking-widest text-2xl uppercase sm:text-3xl
 "
             >
-              Eshop
+              <img src={logo} alt="not found" />
             </a>
             <p className="text-gray-600 dark:text-white/70  lg:pr-24 pt-3">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores
-              alias cum
+            Welcome to Vedabyte Store electronics store. We offer high-quality refurbished laptops and desktops from popular brands like Dell, HP, and Lenovo at affordable prices.
             </p>
-            <p className="text-gray-500 mt-4">
-              Made with 💖 by The Coding Journey
-            </p>
-            <a
-              href="https://www.youtube.com/channel/UC1H-a1MKEFXRiFlGNLcy7gQ"
-              target="_blank"
-              className="inline-block bg-primary/90 text-white py-2 px-4 mt-4 text-sm rounded-full"
-            >
-              Visit our YouTube Channel
-            </a>
+            
+            <img clas src={payment} alt="not found" className=" mt-14" />
           </div>
 
           {/* Footer links */}
@@ -63,7 +78,7 @@ const Footer = () => {
                 Important Links
               </h1>
               <ul className="space-y-3">
-                {FooterLinks.map((data, index) => (
+                {FooterLinks1.map((data, index) => (
                   <li key={index}>
                     <a
                       href={data.link}
@@ -95,17 +110,28 @@ const Footer = () => {
             </div>
 
             {/* Company Address */}
-            <div className="py-8 px-4 col-span-2 sm:col-auto">
+            <div className="pt-8 px-4 col-span-2 sm:col-auto">
               <h1 className="text-xl font-bold sm:text-left mb-3">Address</h1>
               <div>
                 <div className="flex items-center gap-3">
                   <FaLocationArrow />
-                  <p>Noida , Uttar Pradesh</p>
+                  <p>Renuka Mata Nagar, Maharashtra 440034</p>
+          
+
                 </div>
                 <div className="flex items-center gap-3 mt-6">
                   <FaMobileAlt />
-                  <p>+91 1234567890</p>
+                  <p>+91 98900 36028</p>
                 </div>
+                <div className="flex items-center gap-3 mt-6">
+                  <IoIosMail />
+                  <p>sales@vedabyte.com</p>
+                </div>
+
+                {/* <div className="flex items-center gap-3 mt-6">
+                  <FaMobileAlt />
+                  <p>CIN: U47411MH2023PTC411446</p>
+                </div> */}
 
                 {/* social links */}
                 <div className="flex items-center gap-3 mt-6">
@@ -123,6 +149,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
+        {/* <Faq/> */}
       </div>
     </div>
   );
