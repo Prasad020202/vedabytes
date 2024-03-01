@@ -17,7 +17,11 @@ import Popup from "./components/Popup/Popup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import Test from "./components/Test.jsx"
+import Test from "./components/Test.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Landing from "./Landing.jsx";
+import Signup from "./Auth/Signup.jsx";
+import SignIn from "./Auth/SignIn.jsx";
 
 const BannerData = {
   discount: "Bestsellers",
@@ -26,8 +30,7 @@ const BannerData = {
   image: Laptop,
   title2: "Bestselling laptops for this month , grab this opportunity fast",
   title3: "Summer Sale",
-  title4:
-    "Click the Button below to see all the products",
+  title4: "Click the Button below to see all the products",
   bgColor: "#f42c37",
 };
 
@@ -61,27 +64,15 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
-      <Navbar handleOrderPopup={handleOrderPopup} />
-      <Hero handleOrderPopup={handleOrderPopup} />
-      <Category />
-      <Category2 />
-      <Services />
-      <Banner data={BannerData} />
-      {/* <Products /> */}
-      <ProductCard/>
-      <Banner data={BannerData2} />
-      {/* <Products /> */}
-      <ProductCard/>
-      <Banner data={BannerData} />
-      {/* <Products /> */}
-      <ProductCard/>
-      <Partners />
-      <Blogs />
-      {/* <Test/> */}
-      <Footer />
-      <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/Signin" element={<SignIn />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 
