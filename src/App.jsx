@@ -6,6 +6,7 @@ import Category2 from "./components/Category/Category2";
 import Services from "./components/Services/Services";
 import Banner from "./components/Banner/Banner";
 import Partners from "./components/Partners/Partners.jsx";
+import ProductDetail from "./components/ProductDetails/ProductDetail.jsx"
 
 import Laptop from "./assets/hero/5.png";
 import smartwatch2 from "./assets/category/smartwatch2-removebg-preview.png";
@@ -70,6 +71,8 @@ const App = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Signin" element={<SignIn />} />
+          <Route path="/Productdetails" element={<ProductDetail />} />
+
         </Routes>
       </BrowserRouter>
     </>
