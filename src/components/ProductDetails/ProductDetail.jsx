@@ -9,7 +9,6 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { MdStorage } from "react-icons/md";
 import Circle from '@uiw/react-color-circle';
 import { FaRupeeSign } from "react-icons/fa";
-import ReactImageMagnify from 'react-image-magnify';
 import Sfooter from "../Footer/Sfooter"
 import ImageMagnifier from "./ImageMagnifier";
 import IncrementDecrementBtn from "./IncrementDecrementBtn";
