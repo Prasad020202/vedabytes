@@ -11,6 +11,12 @@ import Circle from '@uiw/react-color-circle';
 import { FaRupeeSign } from "react-icons/fa";
 import ReactImageMagnify from 'react-image-magnify';
 import Sfooter from "../Footer/Sfooter"
+import ImageMagnifier from "./ImageMagnifier";
+import IncrementDecrementBtn from "./IncrementDecrementBtn";
+import Navs from "../Navbar/Navbarsec"
+
+
+// const IMG_URL = {one};
 
 
 
@@ -31,7 +37,7 @@ const Container = styled.div`
 
   padding: 0 1rem;
   margin: 0 auto;
-  margin-top: 1%;
+  
 `;
 
 const ProductDiv = styled.div`
@@ -52,7 +58,13 @@ const ProductDivRight = styled.div`
 display: flex;
 flex-direction: column;
   padding: 20px;
-`;
+  .pminus{
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+
+  }
+  `;
 
 const ImgContainer = styled.div`
   img {
@@ -179,6 +191,12 @@ const AddCartButton = styled(Button)`
   background-color: #00a2ff;
   border: 2px solid #006eff;
   margin-right: 8px;
+  width: 20%;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  
 
   &:hover {
     background-color: #fff;
@@ -188,6 +206,9 @@ const AddCartButton = styled(Button)`
 const BuyNowButton = styled(Button)`
   background-color: #000;
   border: 2px solid #000;
+  width: 20%;
+  /* height: 6vh; */
+  font-size: 12px;
 
   &:hover {
     background-color: #fff;
@@ -201,6 +222,7 @@ const ProductName = styled.span`
   font-weight: 700;
   letter-spacing: 1px;
   opacity: 0.9;
+  
 `;
 const Productprice=styled.div`
 align-items: center;
@@ -235,12 +257,14 @@ const Product = () => {
 
   return (
     <>
+    <Navs/>
     <MainWrapper>
+      
       <Container>
         <ProductDiv>
           <ProductDivLeft>
             <ImgContainer>
-              <img src={one} alt="watch" />
+              {/* <img src={one} alt="watch" /> */}
 
               {/* <div style={{ position: 'relative' }}>
   <ReactImageMagnify {...{
@@ -262,6 +286,11 @@ const Product = () => {
     }
   }} />
 </div> */}
+
+
+
+    <ImageMagnifier imgUrl={one} />
+  
 
             </ImgContainer>
             <HoverContainer>
@@ -323,7 +352,7 @@ const Product = () => {
             </Detailed>
             </Specifications>
 
-            <Colorpall><h1><strong>Available Colors</strong></h1>
+            {/* <Colorpall><h1><strong>Available Colors</strong></h1>
             <Colorcontainer>
 
             <Circle
@@ -331,9 +360,11 @@ const Product = () => {
               /></Colorcontainer>
 
 
-            </Colorpall>
+            </Colorpall> */}
+            <div className='pminus'>
+            <IncrementDecrementBtn minValue={1} maxValue={10} /></div>
             <ButtonGroups>
-              <AddCartButton type="button"><i className="fas fa-shopping-cart"></i>add to cart</AddCartButton>
+              <AddCartButton type="button">add to cart</AddCartButton>
               <BuyNowButton type="button"><i className="fas fa-wallet"></i>buy now</BuyNowButton>
             </ButtonGroups>
 
