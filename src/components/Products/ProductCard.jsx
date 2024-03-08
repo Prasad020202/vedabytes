@@ -40,7 +40,6 @@
 // };
 
 // export default ProductCard;
-import { Link } from 'react-router-dom';
 import ProductTemplate from './ProductTemplate';
 
 // import styled from 'styled-components';
@@ -281,18 +280,10 @@ const ProductCard = () => {
   return (
     <div className="mb-10 mx-28">
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 place-items-center">
-     <Link to='/Productdetails'>
-      <ProductTemplate/></Link>
-      <Link to='/Productdetails'>
-      <ProductTemplate/></Link>
-      <Link to='/Productdetails'>
-      <ProductTemplate/></Link>
-      <Link to='/Productdetails'>
-      <ProductTemplate/></Link>
-      
-      {/* <ProductTemplate/>
       <ProductTemplate/>
-      <ProductTemplate/> */}
+      <ProductTemplate/>
+      <ProductTemplate/>
+      <ProductTemplate/>
 
 
 

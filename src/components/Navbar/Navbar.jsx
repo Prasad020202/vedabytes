@@ -154,8 +154,6 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from "react-icons/fa6";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import BasketToggle from"../Basket/BasketToggle";
-
 
 const section = styled.section`
   width: 100vw;
@@ -280,11 +278,6 @@ const HamburgerMenu = styled.span`
 
 const Navigation = () => {
   const [click, setClick] = useState(false);
-  const [basketOpen, setBasketOpen] = useState(false);
-
-  const toggleBasket = () => {
-    setBasketOpen(!basketOpen);
-  };
 
   const scrollTo = (id) => {
     console.log("Scrolling to:", id);
@@ -342,32 +335,13 @@ const Navigation = () => {
                 </div>
 
                 {/* Order-button section */}
-                
-              <button
-                className="relative p-3"
-                
-                
-                type="button"
-              >
-
-                  
+                <button className="relative p-3">
                   <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
                   <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
                     0
                   </div>
-                
+                </button>
 
-              </button>
-
-
-
-
-
-
-
-   
-           
-                
                 {/* Profile section */}
 
                 <div>
@@ -398,35 +372,12 @@ const Navigation = () => {
             </div>
 
             {/* Order-button section */}
-            {/* <button className="relative p-3">
+            <button className="relative p-3">
               <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
               <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
                 0
               </div>
-            </button> */}
-
-
-
-<div>
-      <button
-        className="relative p-3"
-        type="button"
-        onClick={toggleBasket}
-      >
-        <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
-        <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-          0 {/* You may replace this with the actual count of items in the basket */}
-        </div>
-      </button>
-
-      {/* Render the BasketToggle component */}
-      <BasketToggle isOpen={basketOpen} onClose={() => setBasketOpen(false)} />
-    </div>
-
-
-
-
-
+            </button>
 
             {/* Profile section */}
 
