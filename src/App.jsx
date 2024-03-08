@@ -22,6 +22,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./Landing.jsx";
 import Signup from "./Auth/Signup.jsx";
 import SignIn from "./Auth/SignIn.jsx";
+import { NotFound } from "./NotFound.jsx";
+import AdminDashboard from "./Admin/AdminDashboard.jsx";
+import { AddProductPage } from "./Admin/AddProductPage.jsx";
+import { UpdateProductPage } from "./Admin/UpdateProductPage.jsx";
+import { UserDashboard } from "./components/User/UserDashboard.jsx";
+import MyState from "./Context/Mystate.jsx";
+
 
 const BannerData = {
   discount: "Bestsellers",
@@ -64,15 +71,22 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/Signin" element={<SignIn />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+  
+      <MyState>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/*" element={<NotFound />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/admindashboard/addproduct" element={<AddProductPage />} />
+            <Route path="/admindashboard/updateproduct" element={<UpdateProductPage />} />
+            <Route path="/userdashboard" element={<UserDashboard />} />
+          </Routes>
+        </BrowserRouter>
+      </MyState>
+    
   );
 };
 

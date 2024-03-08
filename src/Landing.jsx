@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Category from "./components/Category/Category";
@@ -18,6 +18,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Test from "./components/Test.jsx"
+// import MyContext from "./Context/MyContext.js";
 
 const BannerData = {
     discount: "Bestsellers",
@@ -59,6 +60,11 @@ const Landing = () => {
       });
       AOS.refresh();
     }, []);
+
+    // const context = useContext(MyContext);
+
+    // const name = context;
+
   return (
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
     <Navbar handleOrderPopup={handleOrderPopup} />
@@ -79,6 +85,7 @@ const Landing = () => {
     <Blogs />
     {/* <Test/> */}
     <Footer />
+    {/* {name} */}
     <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
   </div>
   )

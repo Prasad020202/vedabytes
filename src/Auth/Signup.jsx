@@ -32,11 +32,12 @@ const Signup = () => {
         const userUID = user.uid;
 
         // const CollectionRef = doc(db, "UserInfo", userUID);
-        const userRef = doc(collection(db, "UserInfo"), userUID);
+        const userRef = doc(collection(db, "users"), userUID);
 
         const data = {
           Full_Name: user.displayName,
           email: user.email,
+          role: "USER"
         };
 
         setDoc(userRef, data)
