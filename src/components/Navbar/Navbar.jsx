@@ -154,6 +154,8 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from "react-icons/fa6";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Auth/Firebase";
 
 const section = styled.section`
   width: 100vw;
@@ -299,6 +301,12 @@ const Navigation = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogOut = () =>{
+    console.log("log out");
+    signOut(auth)
+    setIsOpen(false)
+  }
+
   return (
     <section id="navigation">
       <NavBar>
@@ -401,6 +409,24 @@ const Navigation = () => {
                     >
                       Login
                     </Link>
+                    
+                  </div>
+                  <div
+                    className="py-1"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="options-menu"
+                  >
+                    <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLogOut();
+                    }}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      Logout
+                    </button>
                     
                   </div>
                 </div>

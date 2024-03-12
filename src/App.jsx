@@ -25,9 +25,10 @@ import SignIn from "./Auth/SignIn.jsx";
 import { NotFound } from "./NotFound.jsx";
 import AdminDashboard from "./Admin/AdminDashboard.jsx";
 import { AddProductPage } from "./Admin/AddProductPage.jsx";
-import { UpdateProductPage } from "./Admin/UpdateProductPage.jsx";
+import UpdateProductPage from "./Admin/UpdateProductPage.jsx";
 import { UserDashboard } from "./components/User/UserDashboard.jsx";
 import MyState from "./Context/Mystate.jsx";
+import { ProtectedRouteForAdmin } from "./ProtectedRoutes/AdminRoute.jsx";
 
 
 const BannerData = {
@@ -79,9 +80,19 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/*" element={<NotFound />} />
+
+            {/* <Route  path="/admindashboard" element={
+              <ProtectedRouteForAdmin>
+            <AdminDashboard />
+            </ProtectedRouteForAdmin>
+            }>
+    
+            </Route> */}
+  
             <Route path="/admindashboard" element={<AdminDashboard />} />
+
             <Route path="/admindashboard/addproduct" element={<AddProductPage />} />
-            <Route path="/admindashboard/updateproduct" element={<UpdateProductPage />} />
+            <Route path="/admindashboard/updateproduct/:id" element={<UpdateProductPage />} />
             <Route path="/userdashboard" element={<UserDashboard />} />
           </Routes>
         </BrowserRouter>

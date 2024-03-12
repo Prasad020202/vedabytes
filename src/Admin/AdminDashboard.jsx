@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { ProductDetail } from "../components/Admin/ProductDetail";
 import { OrderDetail } from "../components/Admin/OrderDetail";
 import { UserDetail } from "../components/Admin/UserDetail";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../Auth/Firebase";
+import MyContext from "../Context/MyContext";
 
 const AdminDashboard = () => {
+
+
+  const context = useContext(MyContext);
+  const {getAllProduct} = context;
+  const {getAllUser} = context;
+
 
   const [userID, setUserID] = useState("");
 
@@ -111,7 +118,7 @@ const AdminDashboard = () => {
                     </svg>
                   </div>
                   <h2 className="title-font font-medium text-3xl text-pink-400 fonts1">
-                    10
+                    {getAllProduct.length}
                   </h2>
                   <p className=" text-pink-500  font-bold">Total Products</p>
                 </div>
@@ -169,7 +176,7 @@ const AdminDashboard = () => {
                     </svg>
                   </div>
                   <h2 className="title-font font-medium text-3xl text-pink-400 fonts1">
-                    10
+                    {getAllUser.length}
                   </h2>
                   <p className=" text-pink-500  font-bold">Total User</p>
                 </div>

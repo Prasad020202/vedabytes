@@ -5,7 +5,6 @@ import { db } from "../Auth/Firebase";
 import { toast } from "react-toastify";
 
 export const AddProductPage = () => {
-
   const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -19,31 +18,33 @@ export const AddProductPage = () => {
     keywords: "",
     thumbnail_img: "",
     img_collection: [],
-    specifications: {}
+    specifications: {},
   });
 
-  
+  const [productimg1, setProductimg1] = useState("");
+  const [productimg2, setProductimg2] = useState("");
+  const [productimg3, setProductimg3] = useState("");
+  const [productimg4, setProductimg4] = useState("");
 
   // Function to handle category selection
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
     setProduct({
       ...product,
-      category: event.target.value
+      category: event.target.value,
     });
- };
+  };
 
- const handleSpecificationChange = (event) => {
-  const { name, value } = event.target;
-  setProduct({
-    ...product,
-    specifications: {
-      ...product.specifications,
-      [name]: value // Dynamically update the specifications object
-    }
-  });
-};
-
+  const handleSpecificationChange = (event) => {
+    const { name, value } = event.target;
+    setProduct({
+      ...product,
+      specifications: {
+        ...product.specifications,
+        [name]: value, // Dynamically update the specifications object
+      },
+    });
+  };
 
   // Function to render the input field based on the selected category
   const renderInputField = () => {
@@ -64,7 +65,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="256 GB"
-                  name = {"Storage"}
+                  name={"Storage"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -75,17 +76,16 @@ export const AddProductPage = () => {
                 >
                   Processor
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="intel i5"
-                  name = {"Processor"}
+                  name={"Processor"}
                   onChange={handleSpecificationChange}
                 />
               </div>
-              
             </div>
 
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -101,7 +101,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="14 Inches"
-                  name = {"Screen_Size"}
+                  name={"Screen_Size"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -112,13 +112,13 @@ export const AddProductPage = () => {
                 >
                   RAM Memory
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="8 GB"
-                  name = {"RAM_Memory"}
+                  name={"RAM_Memory"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -135,7 +135,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="HD/OLED"
-                  name = {"Display"}
+                  name={"Display"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -154,7 +154,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="iRIS"
-                  name = {"Grapics"}
+                  name={"Grapics"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -165,13 +165,13 @@ export const AddProductPage = () => {
                 >
                   Colour
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Black"
-                  name = {"Colour"}
+                  name={"Colour"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -188,7 +188,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="Windows"
-                  name = {"Operating_System"}
+                  name={"Operating_System"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -208,7 +208,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="Security/RGB"
-                  name = {"Special_Features"}
+                  name={"Special_Features"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -217,7 +217,7 @@ export const AddProductPage = () => {
         );
       case "Desktops":
         return (
-            <>
+          <>
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <label
@@ -231,7 +231,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="256 GB"
-                  name = {"Storage"}
+                  name={"Storage"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -242,13 +242,13 @@ export const AddProductPage = () => {
                 >
                   Processor
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="intel i5"
-                  name = {"Processor"}
+                  name={"Processor"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -265,7 +265,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="HD/OLED"
-                  name = {"Display"}
+                  name={"Display"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -284,7 +284,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="Windows/Mac"
-                  name = {"Operating_System"}
+                  name={"Operating_System"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -296,13 +296,13 @@ export const AddProductPage = () => {
                 >
                   Storage
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="8 GB"
-                  name = {"Storage"}
+                  name={"Storage"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -320,7 +320,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="HD/OLED"
-                  name = {"Model_Name"}
+                  name={"Model_Name"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -339,7 +339,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="iRIS"
-                  name = {"Grapics"}
+                  name={"Grapics"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -351,13 +351,13 @@ export const AddProductPage = () => {
                 >
                   Colour
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Black"
-                  name = {"Colour"}
+                  name={"Colour"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -376,17 +376,17 @@ export const AddProductPage = () => {
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
-                  name = {"Special_Features"}
+                  name={"Special_Features"}
                   placeholder="Security/RGB"
                   onChange={handleSpecificationChange}
                 />
               </div>
             </div>
-            </>
+          </>
         );
       case "Printer":
         return (
-            <>
+          <>
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <label
@@ -400,7 +400,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="USB"
-                  name = {"Connectivity_Type"}
+                  name={"Connectivity_Type"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -411,13 +411,13 @@ export const AddProductPage = () => {
                 >
                   Colour
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Colour"
-                  name = {"Colour"}
+                  name={"Colour"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -434,7 +434,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="5 KG"
-                  name = {"Weight"}
+                  name={"Weight"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -453,7 +453,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder=""
-                  name = {"Printing_Technology"}
+                  name={"Printing_Technology"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -465,13 +465,13 @@ export const AddProductPage = () => {
                 >
                   Model Number
                 </label>
-                
+
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder=""
-                  name = {"Model_Number"}
+                  name={"Model_Number"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -489,7 +489,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder=""
-                  name = {"Max_Print_Speed"}
+                  name={"Max_Print_Speed"}
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -509,18 +509,17 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder=""
-                  name = {"Special_Features"}
+                  name={"Special_Features"}
                   onChange={handleSpecificationChange}
                 />
               </div>
             </div>
-            </>
+          </>
         );
 
       case "Accessories":
         return (
-            <>
-
+          <>
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full  px-3">
                 <label
@@ -539,49 +538,46 @@ export const AddProductPage = () => {
                   onChange={handleSpecificationChange}
                 />
               </div>
-
             </div>
-            </>
-        );
-      default:
-        return (
-          <>
           </>
         );
+      default:
+        return <></>;
     }
   };
 
-  const SubmitHandler = async(e) => {
+  const SubmitHandler = async (e) => {
     e.preventDefault();
 
     try {
       console.log(product);
-        const productRef = collection(db, "Products");
-        await addDoc(productRef, product);
-        setProduct({ // Reset the form
-          Product_Name: "",
-          Brand: "",
-          category: "",
-          Description: "",
-          Price: "",
-          keywords: "",
-          thumbnail_img: "",
-          img_collection: [],
-          specifications: {}
-        });
-        navigate("/admindashboard");
-
+      const productRef = collection(db, "Products");
+      await addDoc(productRef, product);
+      setProduct({
+        // Reset the form
+        Product_Name: "",
+        Brand: "",
+        category: "",
+        Description: "",
+        Price: "",
+        keywords: "",
+        thumbnail_img: "",
+        img_collection: [],
+        specifications: {},
+      });
+      navigate("/admindashboard");
     } catch (error) {
-        console.log(error);
-        toast.error("Add Product Failed");
+      console.log(error);
+      toast.error("Add Product Failed");
     }
-  }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      
-      <form class="w-full max-w-lg m-10">
-      <h2 className=" text-2xl font-bold my-14 text-center">Add New Product</h2>
+      <form class="w-full max-w-lg m-10 bg-slate-100 px-10 pb-10">
+        <h2 className=" text-2xl font-bold my-14 text-center">
+          Add New Product
+        </h2>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -596,13 +592,11 @@ export const AddProductPage = () => {
               type="text"
               placeholder="ASUS VIVOBOOK"
               value={product.Product_Name}
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Product_Name: e.target.value
-                    }
-                )
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  Product_Name: e.target.value,
+                });
               }}
             />
           </div>
@@ -619,19 +613,15 @@ export const AddProductPage = () => {
               type="text"
               placeholder="ASUS"
               value={product.Brand}
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Brand: e.target.value
-                    }
-                )
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  Brand: e.target.value,
+                });
               }}
-              
             />
           </div>
         </div>
-
         <div class="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -678,18 +668,15 @@ export const AddProductPage = () => {
               type="text"
               placeholder="45000"
               value={product.Price}
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Price: e.target.value
-                    }
-                )
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  Price: e.target.value,
+                });
               }}
             />
           </div>
         </div>
-
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -705,13 +692,11 @@ export const AddProductPage = () => {
               type="text"
               placeholder="ASUS vivobook 15 with 256 HDD"
               value={product.Description}
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Description: e.target.value
-                    }
-                )
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  Description: e.target.value,
+                });
               }}
             />
           </div>
@@ -732,17 +717,81 @@ export const AddProductPage = () => {
           </div>
         </div>
 
-        <h3 className="text-xl font-bold my-10">Specifications</h3>
+        {/* //images for the product 1st image will be the thumnail */}
+
+        {/* <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-city"
+            >
+              Add Image
+            </label>
+
+            <input
+              type="file"
+              onChange={(e) => setProductimg1(e.target.files[0])}
+            />
+          </div>
+
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Add Image
+            </label>
+            <input
+              type="file"
+              onChange={(e) => setProductimg2(e.target.files[0])}
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-city"
+            >
+              Add Image
+            </label>
+
+            <input
+              type="file"
+              onChange={(e) => setProductimg3(e.target.files[0])}
+            />
+          </div>
+
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Add Image
+            </label>
+            <input
+              type="file"
+              onChange={(e) => setProductimg4(e.target.files[0])}
+            />
+          </div>
+
+
+        </div> */}
+
+        {selectedCategory !== "" && (
+          <h3 className="text-xl font-bold my-10">Specifications</h3>
+        )}
 
         {renderInputField()}
-
-        <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={SubmitHandler}>
+        <div className="flex justify-center items-end flex-grow mt-10">
+          <button
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-auto"
+            onClick={SubmitHandler}
+          >
             Save Product
-        </button>
-
+          </button>
+        </div>
       </form>
-
-
     </div>
   );
 };
