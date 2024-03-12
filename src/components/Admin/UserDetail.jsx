@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext } from "react";
 import MyContext from "../../Context/MyContext";
 
@@ -8,6 +9,11 @@ export const UserDetail = () => {
 
   console.log(getAllUser);
 
+=======
+import React from "react";
+
+export const UserDetail = () => {
+>>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
   return (
     <div>
       <div>
@@ -30,12 +36,17 @@ export const UserDetail = () => {
                   scope="col"
                   className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
                 >
+<<<<<<< HEAD
                   Name
+=======
+                  Location Name
+>>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 </th>
                 <th
                   scope="col"
                   className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
                 >
+<<<<<<< HEAD
                   Role
                 </th>
                 <th
@@ -43,6 +54,9 @@ export const UserDetail = () => {
                   className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
                 >
                   Email
+=======
+                  Action
+>>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 </th>
                 <th
                   scope="col"
@@ -51,6 +65,7 @@ export const UserDetail = () => {
                   Action
                 </th>
               </tr>
+<<<<<<< HEAD
 
               {
                 getAllUser.map((item, index) => {
@@ -69,6 +84,16 @@ export const UserDetail = () => {
                   )
                 })
               }
+=======
+              <tr className="text-pink-300">
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 "></td>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">
+                  {"name"}
+                </td>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer "></td>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer "></td>
+              </tr>
+>>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             </tbody>
           </table>
         </div>

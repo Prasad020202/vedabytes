@@ -25,7 +25,11 @@ import SignIn from "./Auth/SignIn.jsx";
 import { NotFound } from "./NotFound.jsx";
 import AdminDashboard from "./Admin/AdminDashboard.jsx";
 import { AddProductPage } from "./Admin/AddProductPage.jsx";
+<<<<<<< HEAD
 import UpdateProductPage from "./Admin/UpdateProductPage.jsx";
+=======
+import { UpdateProductPage } from "./Admin/UpdateProductPage.jsx";
+>>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
 import { UserDashboard } from "./components/User/UserDashboard.jsx";
 import MyState from "./Context/Mystate.jsx";
 
@@ -81,7 +85,11 @@ const App = () => {
             <Route path="/*" element={<NotFound />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/admindashboard/addproduct" element={<AddProductPage />} />
+<<<<<<< HEAD
             <Route path="/admindashboard/updateproduct/:id" element={<UpdateProductPage />} />
+=======
+            <Route path="/admindashboard/updateproduct" element={<UpdateProductPage />} />
+>>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             <Route path="/userdashboard" element={<UserDashboard />} />
           </Routes>
         </BrowserRouter>
