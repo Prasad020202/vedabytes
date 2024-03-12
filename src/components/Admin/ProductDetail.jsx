@@ -1,14 +1,32 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import myContext from "../../Context/MyContext";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../Auth/Firebase";
+import { toast } from "react-toastify";
 
 
 export const ProductDetail = () => {
+  const navigate =  useNavigate();
+  
   const context = useContext(myContext);
 
   const{getAllProduct} = context;
 
   console.log(getAllProduct);
+
+  const HandleDelete = (id) => {
+    
+    const deleteRef  = doc(db, "Products", id);
+
+    deleteDoc(deleteRef).then(() => {
+      console.log("Entire Document has been deleted successfully.")
+      alert("Product is Deleted!")
+  })
+  .catch(error => {
+      console.log(error);
+  })
+  }
 
   return (
     <div>
@@ -16,7 +34,7 @@ export const ProductDetail = () => {
         {/* text  */}
         <h1 className=" text-xl text-pink-300 font-bold">All Product</h1>
         {/* Add Product Button  */}
-        <Link to={"/addproduct"}>
+        <Link to={"/admindashboard/addproduct"}>
           <button className="px-5 py-2 bg-pink-50 border border-pink-100 rounded-lg">
             Add Product
           </button>
@@ -99,8 +117,9 @@ export const ProductDetail = () => {
               <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">
                 {Description}
               </td>
-              <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer "><Link to={"/admindashboard/updateproduct"}>Edit</Link></td>
-              <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer ">Delete</td>
+              <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer " ><button onClick={(e)=>{e.preventDefault(); navigate(`/admindashboard/updateproduct/${id}`) }}>Edit</button></td>
+              <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer "><button onClick={(e) => {e.preventDefault(); 
+                HandleDelete(id);}}>Delete</button></td>
             </tr>
                 )
               })

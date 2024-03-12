@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import MyContext from "../../Context/MyContext";
 
 export const UserDetail = () => {
+  const context = useContext(MyContext);
+
+  const{getAllUser} = context;
+
+  console.log(getAllUser);
+
   return (
     <div>
       <div>
@@ -23,13 +30,19 @@ export const UserDetail = () => {
                   scope="col"
                   className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
                 >
-                  Location Name
+                  Name
                 </th>
                 <th
                   scope="col"
                   className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
                 >
-                  Action
+                  Role
+                </th>
+                <th
+                  scope="col"
+                  className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
+                >
+                  Email
                 </th>
                 <th
                   scope="col"
@@ -38,14 +51,24 @@ export const UserDetail = () => {
                   Action
                 </th>
               </tr>
-              <tr className="text-pink-300">
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 "></td>
+
+              {
+                getAllUser.map((item, index) => {
+                  const{id, Full_Name, email, role} = item   
+
+                  return (
+                    <tr className="text-pink-300">
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 "> {index+1} </td>
                 <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">
-                  {"name"}
+                  {Full_Name}
                 </td>
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer "></td>
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer "></td>
-              </tr>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer ">{role}</td>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer ">{email}</td>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer ">Delete</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
