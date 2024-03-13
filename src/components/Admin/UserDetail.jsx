@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import MyContext from "../../Context/MyContext";
+import { deleteDoc, doc } from "@firebase/firestore";
+import { db } from "../../Auth/Firebase";
 
 export const UserDetail = () => {
   const context = useContext(MyContext);
@@ -7,6 +9,19 @@ export const UserDetail = () => {
   const{getAllUser} = context;
 
   console.log(getAllUser);
+
+  const HandleDelete = (id) => {
+    
+    const deleteRef  = doc(db, "users", id);
+
+    deleteDoc(deleteRef).then(() => {
+      console.log("Entire Document has been deleted successfully.")
+      alert("User is Deleted!")
+  })
+  .catch(error => {
+      console.log(error);
+  })
+  }
 
   return (
     <div>
@@ -64,7 +79,10 @@ export const UserDetail = () => {
                 </td>
                 <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer ">{role}</td>
                 <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer ">{email}</td>
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer ">Delete</td>
+                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer "><button onClick={(e) => {
+                  e.preventDefault();
+                  HandleDelete(id);
+                }}>Delete</button></td>
                     </tr>
                   )
                 })
