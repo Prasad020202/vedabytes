@@ -3,8 +3,10 @@ import Image1 from "../../assets/category/gaming.png";
 import Image2 from "../../assets/category/vr.png";
 import Image3 from "../../assets/category/speaker.png";
 import Button from "../Shared/Button";
+import { useNavigate } from "react-router-dom";
 
 const Category = () => {
+  const navigate = useNavigate()
   return (
     <div className="py-8">
       <div className="container">
@@ -18,11 +20,14 @@ const Category = () => {
                 <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2">
                   Laptop
                 </p>
-                <Button
-                  text="Browse"
-                  bgColor={"bg-primary"}
-                  textColor={"text-white"}
-                />
+                <div onClick={(e) => {e.preventDefault(); navigate("/category/Printer")}}>
+                  <Button
+                    text="Browse"
+                    bgColor={"bg-primary"}
+                    textColor={"text-white"}
+                  />
+                </div>
+                
               </div>
             </div>
             <img
@@ -66,11 +71,14 @@ const Category = () => {
                 <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2">
                   Gadget
                 </p>
-                <Button
-                  text="Browse"
-                  bgColor={"bg-white"}
-                  textColor={"text-brandBlue"}
-                />
+                <div onClick={(e) => {e.preventDefault(); navigate("/category/Accessories")}}>
+                  <Button
+                    text="Browse"
+                    bgColor={"bg-white"}
+                    textColor={"text-brandBlue"}
+                  />
+                </div>
+              
               </div>
             </div>
             <img

@@ -32,6 +32,7 @@ import { HomePageProduct } from "./components/HomePageProduct/HomePageProduct.js
 import MyState from "./Context/Mystate.jsx";
 import { ProtectedRouteForAdmin } from "./ProtectedRoutes/AdminRoute.jsx";
 import { ProductInfo } from "./components/ProductInfo/ProductInfo.jsx";
+import { CategoryPage } from "./components/Category/CategoryPage.jsx";
 
 
 const BannerData = {
@@ -99,6 +100,7 @@ const App = () => {
             <Route path="/userdashboard" element={<UserDashboard />} />
             <Route path="/homeProducts" element={<HomePageProduct />} />
             <Route path="/productinfo/:id" element={<ProductInfo />} />
+            <Route path="/category/:categoryname" element={<CategoryPage />} />  {/* category Page route  */}
           </Routes>
         </BrowserRouter>
       </MyState>
