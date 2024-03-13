@@ -1,29 +1,20 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from "react";
-=======
-import React, { useEffect, useState } from "react";
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { ProductDetail } from "../components/Admin/ProductDetail";
 import { OrderDetail } from "../components/Admin/OrderDetail";
 import { UserDetail } from "../components/Admin/UserDetail";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../Auth/Firebase";
-<<<<<<< HEAD
 import MyContext from "../Context/MyContext";
 
 const AdminDashboard = () => {
+
 
   const context = useContext(MyContext);
   const {getAllProduct} = context;
   const {getAllUser} = context;
 
 
-=======
-
-const AdminDashboard = () => {
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
   const [userID, setUserID] = useState("");
 
   const [user, setUser] = useState();
@@ -127,11 +118,7 @@ const AdminDashboard = () => {
                     </svg>
                   </div>
                   <h2 className="title-font font-medium text-3xl text-pink-400 fonts1">
-<<<<<<< HEAD
                     {getAllProduct.length}
-=======
-                    10
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   </h2>
                   <p className=" text-pink-500  font-bold">Total Products</p>
                 </div>
@@ -189,11 +176,7 @@ const AdminDashboard = () => {
                     </svg>
                   </div>
                   <h2 className="title-font font-medium text-3xl text-pink-400 fonts1">
-<<<<<<< HEAD
                     {getAllUser.length}
-=======
-                    10
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   </h2>
                   <p className=" text-pink-500  font-bold">Total User</p>
                 </div>

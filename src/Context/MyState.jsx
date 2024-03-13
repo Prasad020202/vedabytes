@@ -13,10 +13,7 @@ function myState({ children }) {
 
   // User State
   const [getAllProduct, setGetAllProduct] = useState([]);
-<<<<<<< HEAD
   const [getAllUser, setGetAllUser] = useState([]);
-=======
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
 
   /**========================================================================
    *========================================================================**/
@@ -30,18 +27,12 @@ function myState({ children }) {
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
       productArray.push({ ...doc.data(), id: doc.id });
 
     });
     setGetAllProduct(productArray);
   };
 
-<<<<<<< HEAD
   const getAllUserFunction = async () => {
     const querySnapshot = await getDocs(collection(db, "users"));
 
@@ -60,20 +51,12 @@ function myState({ children }) {
   useEffect(() => {
     getAllProductFunction();
     getAllUserFunction();
-=======
-  useEffect(() => {
-    getAllProductFunction();
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
   }, []);
   return (
     <MyContext.Provider
       value={{
-<<<<<<< HEAD
         getAllProduct,
         getAllUser
-=======
-        getAllProduct
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
       }}
     >
       {children}

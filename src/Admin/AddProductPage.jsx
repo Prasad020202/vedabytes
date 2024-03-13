@@ -5,10 +5,6 @@ import { db } from "../Auth/Firebase";
 import { toast } from "react-toastify";
 
 export const AddProductPage = () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
   const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -22,27 +18,19 @@ export const AddProductPage = () => {
     keywords: "",
     thumbnail_img: "",
     img_collection: [],
-<<<<<<< HEAD
     specifications: {},
   });
 
-  const [productimg1, setProductimg1] = useState("")
-  const [productimg2, setProductimg2] = useState("")
-  const [productimg3, setProductimg3] = useState("")
-  const [productimg4, setProductimg4] = useState("")
-=======
-    specifications: {}
-  });
-
-  
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
+  const [productimg1, setProductimg1] = useState("");
+  const [productimg2, setProductimg2] = useState("");
+  const [productimg3, setProductimg3] = useState("");
+  const [productimg4, setProductimg4] = useState("");
 
   // Function to handle category selection
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
     setProduct({
       ...product,
-<<<<<<< HEAD
       category: event.target.value,
     });
   };
@@ -57,23 +45,6 @@ export const AddProductPage = () => {
       },
     });
   };
-=======
-      category: event.target.value
-    });
- };
-
- const handleSpecificationChange = (event) => {
-  const { name, value } = event.target;
-  setProduct({
-    ...product,
-    specifications: {
-      ...product.specifications,
-      [name]: value // Dynamically update the specifications object
-    }
-  });
-};
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
 
   // Function to render the input field based on the selected category
   const renderInputField = () => {
@@ -94,11 +65,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="256 GB"
-<<<<<<< HEAD
                   name={"Storage"}
-=======
-                  name = {"Storage"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -109,28 +76,16 @@ export const AddProductPage = () => {
                 >
                   Processor
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="intel i5"
-<<<<<<< HEAD
                   name={"Processor"}
                   onChange={handleSpecificationChange}
                 />
               </div>
-=======
-                  name = {"Processor"}
-                  onChange={handleSpecificationChange}
-                />
-              </div>
-              
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             </div>
 
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -146,11 +101,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="14 Inches"
-<<<<<<< HEAD
                   name={"Screen_Size"}
-=======
-                  name = {"Screen_Size"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -161,21 +112,13 @@ export const AddProductPage = () => {
                 >
                   RAM Memory
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="8 GB"
-<<<<<<< HEAD
                   name={"RAM_Memory"}
-=======
-                  name = {"RAM_Memory"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -192,11 +135,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="HD/OLED"
-<<<<<<< HEAD
                   name={"Display"}
-=======
-                  name = {"Display"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -215,11 +154,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="iRIS"
-<<<<<<< HEAD
                   name={"Grapics"}
-=======
-                  name = {"Grapics"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -230,21 +165,13 @@ export const AddProductPage = () => {
                 >
                   Colour
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Black"
-<<<<<<< HEAD
                   name={"Colour"}
-=======
-                  name = {"Colour"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -261,11 +188,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="Windows"
-<<<<<<< HEAD
                   name={"Operating_System"}
-=======
-                  name = {"Operating_System"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -285,11 +208,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="Security/RGB"
-<<<<<<< HEAD
                   name={"Special_Features"}
-=======
-                  name = {"Special_Features"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -298,11 +217,7 @@ export const AddProductPage = () => {
         );
       case "Desktops":
         return (
-<<<<<<< HEAD
           <>
-=======
-            <>
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <label
@@ -316,11 +231,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="256 GB"
-<<<<<<< HEAD
                   name={"Storage"}
-=======
-                  name = {"Storage"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -331,21 +242,13 @@ export const AddProductPage = () => {
                 >
                   Processor
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="intel i5"
-<<<<<<< HEAD
                   name={"Processor"}
-=======
-                  name = {"Processor"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -362,11 +265,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="HD/OLED"
-<<<<<<< HEAD
                   name={"Display"}
-=======
-                  name = {"Display"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -385,11 +284,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="Windows/Mac"
-<<<<<<< HEAD
                   name={"Operating_System"}
-=======
-                  name = {"Operating_System"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -401,21 +296,13 @@ export const AddProductPage = () => {
                 >
                   Storage
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="8 GB"
-<<<<<<< HEAD
                   name={"Storage"}
-=======
-                  name = {"Storage"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -433,11 +320,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="HD/OLED"
-<<<<<<< HEAD
                   name={"Model_Name"}
-=======
-                  name = {"Model_Name"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -456,11 +339,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="iRIS"
-<<<<<<< HEAD
                   name={"Grapics"}
-=======
-                  name = {"Grapics"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -472,21 +351,13 @@ export const AddProductPage = () => {
                 >
                   Colour
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Black"
-<<<<<<< HEAD
                   name={"Colour"}
-=======
-                  name = {"Colour"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -505,29 +376,17 @@ export const AddProductPage = () => {
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
-<<<<<<< HEAD
                   name={"Special_Features"}
-=======
-                  name = {"Special_Features"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   placeholder="Security/RGB"
                   onChange={handleSpecificationChange}
                 />
               </div>
             </div>
-<<<<<<< HEAD
           </>
         );
       case "Printer":
         return (
           <>
-=======
-            </>
-        );
-      case "Printer":
-        return (
-            <>
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <label
@@ -541,11 +400,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder="USB"
-<<<<<<< HEAD
                   name={"Connectivity_Type"}
-=======
-                  name = {"Connectivity_Type"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -556,21 +411,13 @@ export const AddProductPage = () => {
                 >
                   Colour
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Colour"
-<<<<<<< HEAD
                   name={"Colour"}
-=======
-                  name = {"Colour"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -587,11 +434,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder="5 KG"
-<<<<<<< HEAD
                   name={"Weight"}
-=======
-                  name = {"Weight"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -610,11 +453,7 @@ export const AddProductPage = () => {
                   id="grid-first-name"
                   type="text"
                   placeholder=""
-<<<<<<< HEAD
                   name={"Printing_Technology"}
-=======
-                  name = {"Printing_Technology"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -626,21 +465,13 @@ export const AddProductPage = () => {
                 >
                   Model Number
                 </label>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                 <input
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder=""
-<<<<<<< HEAD
                   name={"Model_Number"}
-=======
-                  name = {"Model_Number"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -658,11 +489,7 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder=""
-<<<<<<< HEAD
                   name={"Max_Print_Speed"}
-=======
-                  name = {"Max_Print_Speed"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
@@ -682,30 +509,17 @@ export const AddProductPage = () => {
                   id="grid-last-name"
                   type="text"
                   placeholder=""
-<<<<<<< HEAD
                   name={"Special_Features"}
-=======
-                  name = {"Special_Features"}
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
                   onChange={handleSpecificationChange}
                 />
               </div>
             </div>
-<<<<<<< HEAD
           </>
-=======
-            </>
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
         );
 
       case "Accessories":
         return (
-<<<<<<< HEAD
           <>
-=======
-            <>
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full  px-3">
                 <label
@@ -724,7 +538,6 @@ export const AddProductPage = () => {
                   onChange={handleSpecificationChange}
                 />
               </div>
-<<<<<<< HEAD
             </div>
           </>
         );
@@ -734,26 +547,10 @@ export const AddProductPage = () => {
   };
 
   const SubmitHandler = async (e) => {
-=======
-
-            </div>
-            </>
-        );
-      default:
-        return (
-          <>
-          </>
-        );
-    }
-  };
-
-  const SubmitHandler = async(e) => {
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
     e.preventDefault();
 
     try {
       console.log(product);
-<<<<<<< HEAD
       const productRef = collection(db, "Products");
       await addDoc(productRef, product);
       setProduct({
@@ -777,38 +574,10 @@ export const AddProductPage = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <form class="w-full max-w-lg m-10">
+      <form class="w-full max-w-lg m-10 bg-slate-100 px-10 pb-10">
         <h2 className=" text-2xl font-bold my-14 text-center">
           Add New Product
         </h2>
-=======
-        const productRef = collection(db, "Products");
-        await addDoc(productRef, product);
-        setProduct({ // Reset the form
-          Product_Name: "",
-          Brand: "",
-          category: "",
-          Description: "",
-          Price: "",
-          keywords: "",
-          thumbnail_img: "",
-          img_collection: [],
-          specifications: {}
-        });
-        navigate("/admindashboard");
-
-    } catch (error) {
-        console.log(error);
-        toast.error("Add Product Failed");
-    }
-  }
-
-  return (
-    <div className="flex justify-center items-center h-screen">
-      
-      <form class="w-full max-w-lg m-10">
-      <h2 className=" text-2xl font-bold my-14 text-center">Add New Product</h2>
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -823,21 +592,11 @@ export const AddProductPage = () => {
               type="text"
               placeholder="ASUS VIVOBOOK"
               value={product.Product_Name}
-<<<<<<< HEAD
               onChange={(e) => {
                 setProduct({
                   ...product,
                   Product_Name: e.target.value,
                 });
-=======
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Product_Name: e.target.value
-                    }
-                )
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
               }}
             />
           </div>
@@ -854,7 +613,6 @@ export const AddProductPage = () => {
               type="text"
               placeholder="ASUS"
               value={product.Brand}
-<<<<<<< HEAD
               onChange={(e) => {
                 setProduct({
                   ...product,
@@ -864,21 +622,6 @@ export const AddProductPage = () => {
             />
           </div>
         </div>
-=======
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Brand: e.target.value
-                    }
-                )
-              }}
-              
-            />
-          </div>
-        </div>
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
         <div class="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -925,29 +668,15 @@ export const AddProductPage = () => {
               type="text"
               placeholder="45000"
               value={product.Price}
-<<<<<<< HEAD
               onChange={(e) => {
                 setProduct({
                   ...product,
                   Price: e.target.value,
                 });
-=======
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Price: e.target.value
-                    }
-                )
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
               }}
             />
           </div>
         </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -963,21 +692,11 @@ export const AddProductPage = () => {
               type="text"
               placeholder="ASUS vivobook 15 with 256 HDD"
               value={product.Description}
-<<<<<<< HEAD
               onChange={(e) => {
                 setProduct({
                   ...product,
                   Description: e.target.value,
                 });
-=======
-              onChange= {(e)=>{
-                setProduct(
-                    {
-                    ...product, 
-                    Description: e.target.value
-                    }
-                )
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
               }}
             />
           </div>
@@ -997,8 +716,6 @@ export const AddProductPage = () => {
             />
           </div>
         </div>
-
-<<<<<<< HEAD
 
         {/* //images for the product 1st image will be the thumnail */}
 
@@ -1061,29 +778,20 @@ export const AddProductPage = () => {
 
         </div> */}
 
-
-        <h3 className="text-xl font-bold my-10">Specifications</h3>
-        {renderInputField()}
-        <button
-          class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-          onClick={SubmitHandler}
-        >
-          Save Product
-        </button>
-      </form>
-=======
-        <h3 className="text-xl font-bold my-10">Specifications</h3>
+        {selectedCategory !== "" && (
+          <h3 className="text-xl font-bold my-10">Specifications</h3>
+        )}
 
         {renderInputField()}
-
-        <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={SubmitHandler}>
+        <div className="flex justify-center items-end flex-grow mt-10">
+          <button
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-auto"
+            onClick={SubmitHandler}
+          >
             Save Product
-        </button>
-
+          </button>
+        </div>
       </form>
-
-
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-<<<<<<< HEAD
 import { Link, useNavigate } from "react-router-dom";
 import myContext from "../../Context/MyContext";
 import { deleteDoc, doc } from "firebase/firestore";
@@ -10,20 +9,12 @@ import { toast } from "react-toastify";
 export const ProductDetail = () => {
   const navigate =  useNavigate();
   
-=======
-import { Link } from "react-router-dom";
-import myContext from "../../Context/MyContext";
-
-
-export const ProductDetail = () => {
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
   const context = useContext(myContext);
 
   const{getAllProduct} = context;
 
   console.log(getAllProduct);
 
-<<<<<<< HEAD
   const HandleDelete = (id) => {
     
     const deleteRef  = doc(db, "Products", id);
@@ -37,19 +28,13 @@ export const ProductDetail = () => {
   })
   }
 
-=======
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
   return (
     <div>
       <div className="py-5 flex justify-between items-center">
         {/* text  */}
         <h1 className=" text-xl text-pink-300 font-bold">All Product</h1>
         {/* Add Product Button  */}
-<<<<<<< HEAD
         <Link to={"/admindashboard/addproduct"}>
-=======
-        <Link to={"/addproduct"}>
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
           <button className="px-5 py-2 bg-pink-50 border border-pink-100 rounded-lg">
             Add Product
           </button>
@@ -132,14 +117,9 @@ export const ProductDetail = () => {
               <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">
                 {Description}
               </td>
-<<<<<<< HEAD
               <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer " ><button onClick={(e)=>{e.preventDefault(); navigate(`/admindashboard/updateproduct/${id}`) }}>Edit</button></td>
               <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer "><button onClick={(e) => {e.preventDefault(); 
                 HandleDelete(id);}}>Delete</button></td>
-=======
-              <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer "><Link to={"/admindashboard/updateproduct"}>Edit</Link></td>
-              <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer ">Delete</td>
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
             </tr>
                 )
               })

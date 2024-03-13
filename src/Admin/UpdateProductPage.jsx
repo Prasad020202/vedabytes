@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
@@ -630,7 +629,7 @@ const UpdateProductPage = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <form class="w-full max-w-lg m-10">
+      <form class="w-full max-w-lg m-10  bg-slate-100 px-10 pb-10">
         <h2 className=" text-2xl font-bold my-14 text-center">
           Update Product
         </h2>
@@ -799,14 +798,3 @@ const UpdateProductPage = () => {
 };
 
 export default UpdateProductPage;
-=======
-import React from 'react'
-
-const UpdateProductPage = () => {
-  return (
-    <div>UpdateProductPage</div>
-  )
-}
-
-export default UpdateProductPage
->>>>>>> 426321214d3ea17288a22dd18d88bc77d363d556
