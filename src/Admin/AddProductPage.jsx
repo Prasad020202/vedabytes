@@ -1,8 +1,9 @@
 import { addDoc, collection, doc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../Auth/Firebase";
+import { db, storage } from "../Auth/Firebase";
 import { toast } from "react-toastify";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export const AddProductPage = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const AddProductPage = () => {
     specifications: {},
   });
 
-  const [productimg1, setProductimg1] = useState("");
+  const [productImgThumbnail, setProductImgThumbnail] = useState(null);
   const [productimg2, setProductimg2] = useState("");
   const [productimg3, setProductimg3] = useState("");
   const [productimg4, setProductimg4] = useState("");
@@ -548,29 +549,90 @@ export const AddProductPage = () => {
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-
+   
+    // Wait for the image upload to complete
+    await submitImage();
+   
     try {
-      console.log(product);
-      const productRef = collection(db, "Products");
-      await addDoc(productRef, product);
-      setProduct({
-        // Reset the form
-        Product_Name: "",
-        Brand: "",
-        category: "",
-        Description: "",
-        Price: "",
-        keywords: "",
-        thumbnail_img: "",
-        img_collection: [],
-        specifications: {},
-      });
-      navigate("/admindashboard");
+       const productRef = collection(db, "Products");
+       await addDoc(productRef, product);
+       setProduct({
+         // Reset the form
+         Product_Name: "",
+         Brand: "",
+         category: "",
+         Description: "",
+         Price: "",
+         keywords: "",
+         thumbnail_img: "",
+         img_collection: [],
+         specifications: {},
+       });
+       navigate("/admindashboard");
     } catch (error) {
-      console.log(error);
-      toast.error("Add Product Failed");
+       console.log(error);
+       toast.error("Add Product Failed");
     }
-  };
+ };
+   
+
+  // only for production it should add up with submitHandler function
+
+  const submitImage = async () => {
+    // e.preventDefault();
+
+    if (!productImgThumbnail) {
+       alert("Add Image First!");
+       return;
+    }
+   
+    // Validate file type and size (optional)
+    const fileType = productImgThumbnail.type;
+    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    if (!validImageTypes.includes(fileType)) {
+       alert("Please select a valid image file (gif, jpeg, png).");
+       return;
+    }
+   
+    // Generate a unique ID for the image
+    const uniqueId = Math.random().toString(36).substring(2);
+   
+    // Create a reference to the location in Firebase Storage
+    const imgRef = ref(storage, `products/${uniqueId}`);
+   
+    // Upload the image
+    const uploadTask = uploadBytesResumable(imgRef, productImgThumbnail);
+   
+    // Wait for the upload to complete
+    await new Promise((resolve, reject) => {
+       uploadTask.on('state_changed', 
+         (snapshot) => {
+           // You can use this section to display upload progress
+         }, 
+         (error) => {
+           // Handle unsuccessful uploads
+           console.error(error);
+           alert("Failed to upload image. Please try again.");
+           reject(error);
+         }, 
+         () => {
+           // Handle successful uploads on complete
+           console.log('Upload completed successfully');
+           resolve();
+         }
+       );
+    });
+   
+    // Get the download URL
+    const downloadLink = await getDownloadURL(imgRef);
+   
+    // Update the product state with the thumbnail image URL
+    setProduct({ ...product, thumbnail_img: downloadLink });
+
+    console.log("new products" + product.thumbnail_img);
+   };
+   
+   
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -717,6 +779,62 @@ export const AddProductPage = () => {
           </div>
         </div>
 
+        <div class="flex flex-wrap -mx-3 mb-2 mt-5">
+          <div class="w-full md:w-1/1 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-city"
+            >
+              Thumbnail
+            </label>
+
+            {/* <input
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="grid-city"
+              type="text"
+              placeholder="ASUS vivobook 15 with 256 HDD"
+              value={product.Description}
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  Description: e.target.value,
+                });
+              }}
+            /> */}
+
+            <div class="flex items-center justify-center w-full">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center w-full h-46 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-200 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              >
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span> or drag
+                    and drop
+                  </p>
+                </div>
+                <input id="dropzone-file" type="file" class="hidden" onChange={(e) => {setProductImgThumbnail(e.target.files[0])}}/>
+              </label>
+            </div>
+          </div>
+          <button onClick={submitImage}>Submit</button>
+        </div>
+
         {/* //images for the product 1st image will be the thumnail */}
 
         {/* <div class="flex flex-wrap -mx-3 mb-2">
@@ -783,6 +901,7 @@ export const AddProductPage = () => {
         )}
 
         {renderInputField()}
+
         <div className="flex justify-center items-end flex-grow mt-10">
           <button
             className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-auto"
