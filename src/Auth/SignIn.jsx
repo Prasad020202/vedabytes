@@ -1,14 +1,13 @@
 import { Password } from "@mui/icons-material";
 import React, { useState } from "react";
-import { auth, db } from "./Firebase";
+import { auth } from "./Firebase";
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { QuerySnapshot, collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { doc } from "firebase/firestore";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -19,67 +18,17 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [error, setErrorMsg] = useState("");
 
-  const handleSubmission = async(e) => {
+  const handleSubmission = (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
-      .then(async(userCredential) => {
+      .then((userCredential) => {
         // Signed in
-
-        const userID = userCredential.user.uid;
-
-        const docRef = doc(db, "users", userID);
-
-        const docData = await getDoc(docRef);
-
-        const role = docData.data().role;
-
-        if(role == "USER"){
-          console.log("user it is");
-          navigate("/userdashboard")
-        }else{
-          console.log("admin it is");
-          navigate("/admindashboard")
-        }
-        
-
+        navigate("/");
       })
       .catch((error) => {
         setErrorMsg(error.message);
       });
-
-    // try {
-    //   const users = await signInWithEmailAndPassword(auth, email, password);
-
-    //   console.log(users);
-
-    //   try {
-    //     const q = query(
-    //               collection(db, "users"), 
-    //               where('uid', '==', users?.user?.uid)
-    //               );
-        
-        
-    //     const data = onSnapshot(q, (QuerySnapshot) => {
-    //       let user;
-
-    //       QuerySnapshot.forEach((doc) => user = doc.data());
-    //       localStorage.setItem("users", JSON.stringify(user));
-
-    //       console.log(user);
-
-    //       if(user.role == "user"){
-    //         navigate("/");
-    //       }else{
-    //         navigate("/admindashboard")
-    //       }
-    //     })          
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const LoginWithGoogle = () => {
@@ -106,8 +55,6 @@ const SignIn = () => {
         // ...
       });
   };
-
-
   return (
     <>
       <div classNameName="">

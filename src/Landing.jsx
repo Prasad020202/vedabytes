@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Category from "./components/Category/Category";
@@ -9,7 +9,7 @@ import Partners from "./components/Partners/Partners.jsx";
 
 import Laptop from "./assets/hero/5.png";
 import smartwatch2 from "./assets/category/smartwatch2-removebg-preview.png";
-import ProductCard from "./components/Products/ProductCard.jsx";
+import ProductCard from "./components/Productscards/ProductCard.jsx";
 // import Products from "./components/Products/Products";
 import Blogs from "./components/Blogs/Blogs";
 import Footer from "./components/Footer/Footer.jsx";
@@ -18,7 +18,23 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Test from "./components/Test.jsx"
-// import MyContext from "./Context/MyContext.js";
+import styled from "styled-components";
+
+import Lappy from "./components/Bestsellers/Lappy.jsx"
+import Print from "./components/Bestsellers/Print.jsx";
+import Desktops from "./components/Bestsellers/Desktops.jsx";
+
+
+const Navcont=styled.div`
+z-index: 11;
+  
+
+  position: sticky;
+  top: 0;
+  background-color: white;
+  
+`
+
 
 const BannerData = {
     discount: "Bestsellers",
@@ -60,34 +76,46 @@ const Landing = () => {
       });
       AOS.refresh();
     }, []);
-
-    // const context = useContext(MyContext);
-
-    // const name = context;
-
   return (
+    <>
+    <Navcont><Navbar handleOrderPopup={handleOrderPopup} /></Navcont>
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
-    <Navbar handleOrderPopup={handleOrderPopup} />
+     
     <Hero handleOrderPopup={handleOrderPopup} />
     <Category />
     <Category2 />
     <Services />
     <Banner data={BannerData} />
     {/* <Products /> */}
-    <ProductCard/>
+
+
+
+    {/* <ProductCard/> */}
+
+
+    <Lappy/>
     <Banner data={BannerData2} />
     {/* <Products /> */}
-    <ProductCard/>
+
+    {/* <ProductCard/> */}
+
+    <Print/>
+
     <Banner data={BannerData} />
     {/* <Products /> */}
-    <ProductCard/>
+
+    {/* <ProductCard/> */}
+
+    <Desktops/>
+
+
     <Partners />
     <Blogs />
     {/* <Test/> */}
     <Footer />
-    {/* {name} */}
     <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
   </div>
+  </>
   )
 }
 

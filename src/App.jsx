@@ -6,10 +6,11 @@ import Category2 from "./components/Category/Category2";
 import Services from "./components/Services/Services";
 import Banner from "./components/Banner/Banner";
 import Partners from "./components/Partners/Partners.jsx";
+import ProductDetail from "./components/ProductDetails/ProductDetail.jsx"
 
 import Laptop from "./assets/hero/5.png";
 import smartwatch2 from "./assets/category/smartwatch2-removebg-preview.png";
-import ProductCard from "./components/Products/ProductCard.jsx";
+import ProductCard from "./components/Productscards/ProductCard.jsx";
 // import Products from "./components/Products/Products";
 import Blogs from "./components/Blogs/Blogs";
 import Footer from "./components/Footer/Footer.jsx";
@@ -22,18 +23,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./Landing.jsx";
 import Signup from "./Auth/Signup.jsx";
 import SignIn from "./Auth/SignIn.jsx";
-import { NotFound } from "./NotFound.jsx";
-import AdminDashboard from "./Admin/AdminDashboard.jsx";
-import { AddProductPage } from "./Admin/AddProductPage.jsx";
-import UpdateProductPage from "./Admin/UpdateProductPage.jsx";
-import { UserDashboard } from "./components/User/UserDashboard.jsx";
-
-import { HomePageProduct } from "./components/HomePageProduct/HomePageProduct.jsx";
-import MyState from "./Context/Mystate.jsx";
-import { ProtectedRouteForAdmin } from "./ProtectedRoutes/AdminRoute.jsx";
-import { ProductInfo } from "./components/ProductInfo/ProductInfo.jsx";
-import { CategoryPage } from "./components/Category/CategoryPage.jsx";
-
+import Shoppage from "./components/Shop/Shop.jsx";
+import Testcard from "./Testcard.jsx";
+import Shop from "./components/Shop/Shop.jsx";
 
 const BannerData = {
   discount: "Bestsellers",
@@ -76,35 +68,22 @@ const App = () => {
   }, []);
 
   return (
-  
-      <MyState>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/*" element={<NotFound />} />
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/Signin" element={<SignIn />} />
+          <Route path="/Productdetails" element={<ProductDetail />} />
+          <Route path="/Shoppage" element={<Shoppage />} />
+          <Route path="/test" element={<Testcard />} />
+          <Route path="/test1" element={<Shop />} />
 
-            {/* <Route  path="/admindashboard" element={
-              <ProtectedRouteForAdmin>
-            <AdminDashboard />
-            </ProtectedRouteForAdmin>
-            }>
-    
-            </Route> */}
-  
-            <Route path="/admindashboard" element={<AdminDashboard />} />
+          
 
-            <Route path="/admindashboard/addproduct" element={<AddProductPage />} />
-            <Route path="/admindashboard/updateproduct/:id" element={<UpdateProductPage />} />
-            <Route path="/userdashboard" element={<UserDashboard />} />
-            <Route path="/homeProducts" element={<HomePageProduct />} />
-            <Route path="/productinfo/:id" element={<ProductInfo />} />
-            <Route path="/category/:categoryname" element={<CategoryPage />} />  {/* category Page route  */}
-          </Routes>
-        </BrowserRouter>
-      </MyState>
-    
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 
