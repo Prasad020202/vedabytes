@@ -1,3 +1,3 @@
 VedaByte Project 
-Tech Stack: React.js, Firebase, Redux
+Tech Stack: React.js, Firebase, Redux, Tailwind CSS
 
