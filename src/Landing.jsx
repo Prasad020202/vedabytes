@@ -18,7 +18,25 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Test from "./components/Test.jsx"
+import styled from "styled-components";
 // import MyContext from "./Context/MyContext.js";
+
+
+
+import Lappy from "./components/Bestsellers/Lappy.jsx"
+import Print from "./components/Bestsellers/Print.jsx";
+import Desktops from "./components/Bestsellers/Desktops.jsx";
+
+
+const Navcont=styled.div`
+z-index: 11;
+  
+
+  position: sticky;
+  top: 0;
+  background-color: white;
+  
+`
 
 const BannerData = {
     discount: "Bestsellers",
@@ -66,21 +84,37 @@ const Landing = () => {
     // const name = context;
 
   return (
+    <>
+    <Navcont><Navbar handleOrderPopup={handleOrderPopup} /></Navcont>
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
-    <Navbar handleOrderPopup={handleOrderPopup} />
+    
     <Hero handleOrderPopup={handleOrderPopup} />
     <Category />
     <Category2 />
     <Services />
     <Banner data={BannerData} />
     {/* <Products /> */}
-    <ProductCard/>
+    {/* <ProductCard/> */}
+
+
+
+    <Lappy/>
+
     <Banner data={BannerData2} />
     {/* <Products /> */}
-    <ProductCard/>
+    {/* <ProductCard/> */}
+
+
+
+
+    <Print/>
+
     <Banner data={BannerData} />
     {/* <Products /> */}
-    <ProductCard/>
+    {/* <ProductCard/> */}
+
+    <Desktops/>
+    
     <Partners />
     <Blogs />
     {/* <Test/> */}
@@ -88,6 +122,7 @@ const Landing = () => {
     {/* {name} */}
     <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
   </div>
+  </>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import Image1 from "../../assets/hero/headphone.png";
+import Image1 from "../../assets/hero/desktop.png";
 import Image2 from "../../assets/category/vr.png";
 import Image3 from "../../assets/category/macbook.png";
 import Button from "../Shared/Button";
@@ -31,7 +31,7 @@ const HeroData = [
 
 const Hero = ({ handleOrderPopup }) => {
   const settings = {
-    dots: true,  // Show navigation dots
+    // dots: true,  // Show navigation dots
     arrows: false,
     infinite: true,
     speed: 800,

@@ -35,6 +35,15 @@ import { ProductInfo } from "./components/ProductInfo/ProductInfo.jsx";
 import { CategoryPage } from "./components/Category/CategoryPage.jsx";
 
 
+
+
+import ProductDetail from "./components/ProductDetails/ProductDetail.jsx"
+import Shoppage from "./components/Shop/Shop.jsx";
+import Testcard from "./Testcard.jsx";
+import Shop from "./components/Shop/Shop.jsx";
+
+
+
 const BannerData = {
   discount: "Bestsellers",
   title: "Refurbished Laptops",
@@ -84,6 +93,12 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/*" element={<NotFound />} />
+
+
+            <Route path="/Productdetails" element={<ProductDetail />} />
+           <Route path="/Shoppage" element={<Shoppage />} />
+           <Route path="/test" element={<Testcard />} />
+          <Route path="/test1" element={<Shop />} />
 
             {/* <Route  path="/admindashboard" element={
               <ProtectedRouteForAdmin>
