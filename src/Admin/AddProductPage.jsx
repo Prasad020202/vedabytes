@@ -23,9 +23,8 @@ export const AddProductPage = () => {
   });
 
   const [productImgThumbnail, setProductImgThumbnail] = useState(null);
-  const [productimg2, setProductimg2] = useState("");
-  const [productimg3, setProductimg3] = useState("");
-  const [productimg4, setProductimg4] = useState("");
+
+  const[imgCollection, setImgCollection] = useState([]);
 
   // Function to handle category selection
   const handleCategoryChange = (event) => {
@@ -549,32 +548,33 @@ export const AddProductPage = () => {
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-   
+
     // Wait for the image upload to complete
     await submitImage();
-   
+
+    await submitMultipleImage();
+
     try {
-       const productRef = collection(db, "Products");
-       await addDoc(productRef, product);
-       setProduct({
-         // Reset the form
-         Product_Name: "",
-         Brand: "",
-         category: "",
-         Description: "",
-         Price: "",
-         keywords: "",
-         thumbnail_img: "",
-         img_collection: [],
-         specifications: {},
-       });
-       navigate("/admindashboard");
+      const productRef = collection(db, "Products");
+      await addDoc(productRef, product);
+      setProduct({
+        // Reset the form
+        Product_Name: "",
+        Brand: "",
+        category: "",
+        Description: "",
+        Price: "",
+        keywords: "",
+        thumbnail_img: "",
+        img_collection: [],
+        specifications: {},
+      });
+      navigate("/admindashboard");
     } catch (error) {
-       console.log(error);
-       toast.error("Add Product Failed");
+      console.log(error);
+      toast.error("Add Product Failed");
     }
- };
-   
+  };
 
   // only for production it should add up with submitHandler function
 
@@ -582,54 +582,96 @@ export const AddProductPage = () => {
     // e.preventDefault();
 
     if (!productImgThumbnail) {
-       alert("Add Image First!");
-       return;
+      alert("Add Image First!");
+      return;
     }
-   
+
     // Validate file type and size (optional)
     const fileType = productImgThumbnail.type;
-    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
     if (!validImageTypes.includes(fileType)) {
-       alert("Please select a valid image file (gif, jpeg, png).");
-       return;
+      alert("Please select a valid image file (gif, jpeg, png).");
+      return;
     }
-   
+
     // Generate a unique ID for the image
     const uniqueId = Math.random().toString(36).substring(2);
-   
+
     // Create a reference to the location in Firebase Storage
     const imgRef = ref(storage, `products/${uniqueId}`);
-   
+
     // Upload the image
     const uploadTask = uploadBytesResumable(imgRef, productImgThumbnail);
-   
+
     // Wait for the upload to complete
     await new Promise((resolve, reject) => {
-       uploadTask.on('state_changed', 
-         (snapshot) => {
-           // You can use this section to display upload progress
-         }, 
-         (error) => {
-           // Handle unsuccessful uploads
-           console.error(error);
-           alert("Failed to upload image. Please try again.");
-           reject(error);
-         }, 
-         () => {
-           // Handle successful uploads on complete
-           console.log('Upload completed successfully');
-           resolve();
-         }
-       );
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // You can use this section to display upload progress
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+          console.error(error);
+          alert("Failed to upload image. Please try again.");
+          reject(error);
+        },
+        () => {
+          // Handle successful uploads on complete
+          console.log("Upload completed successfully");
+          resolve();
+        }
+      );
     });
-   
+
     // Get the download URL
     const downloadLink = await getDownloadURL(imgRef);
-   
+
     // Update the product state with the thumbnail image URL
     setProduct({ ...product, thumbnail_img: downloadLink });
 
     console.log("new products" + product.thumbnail_img);
+  };
+
+  const AddMultipleImages = async(e) => {
+
+    setImgCollection(oldArray => [...oldArray, e.target.files]);
+    console.log(imgCollection.length);
+
+    submitMultipleImage(imgCollection.length)
+  }
+
+  const submitMultipleImage = async () => {
+    const uploadPromises = imgCollection.map(async (imgFile) => {
+       const uniqueId = Math.random().toString(36).substring(2);
+       const imgRef = ref(storage, `products/${uniqueId}`);
+       const uploadTask = uploadBytesResumable(imgRef, imgFile);
+   
+       await new Promise((resolve, reject) => {
+         uploadTask.on(
+           "state_changed",
+           (snapshot) => {
+             // You can use this section to display upload progress
+           },
+           (error) => {
+             console.error(error);
+             alert("Failed to upload image. Please try again.");
+             reject(error);
+           },
+           () => {
+             console.log("Upload completed successfully");
+             resolve();
+           }
+         );
+       });
+   
+       return getDownloadURL(imgRef);
+    });
+   
+    const imgUrls = await Promise.all(uploadPromises);
+   
+    // Update the product state with the image collection URLs
+    setProduct({ ...product, img_collection: imgUrls });
    };
    
    
@@ -828,73 +870,43 @@ export const AddProductPage = () => {
                     and drop
                   </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" onChange={(e) => {setProductImgThumbnail(e.target.files[0])}}/>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                  onChange={(e) => {
+                    setProductImgThumbnail(e.target.files[0]);
+                  }}
+                />
               </label>
             </div>
           </div>
-          <button onClick={submitImage}>Submit</button>
         </div>
 
-        {/* //images for the product 1st image will be the thumnail */}
-
-        {/* <div class="flex flex-wrap -mx-3 mb-2">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-city"
-            >
-              Add Image
-            </label>
-
+        <div className="mt-5 flex flex-col gap-5">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="file_input"
+          >
+            Image Collection
+          </label>
+          <div>
             <input
+              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              aria-describedby="file_input_help"
+              id="file_input"
               type="file"
-              onChange={(e) => setProductimg1(e.target.files[0])}
+              multiple
+              onChange={(e) => {AddMultipleImages(e)}}
             />
-          </div>
-
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-zip"
+            <p
+              class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+              id="file_input_help"
             >
-              Add Image
-            </label>
-            <input
-              type="file"
-              onChange={(e) => setProductimg2(e.target.files[0])}
-            />
+              SVG, PNG, JPG or GIF.
+            </p>
           </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-2">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-city"
-            >
-              Add Image
-            </label>
-
-            <input
-              type="file"
-              onChange={(e) => setProductimg3(e.target.files[0])}
-            />
-          </div>
-
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-zip"
-            >
-              Add Image
-            </label>
-            <input
-              type="file"
-              onChange={(e) => setProductimg4(e.target.files[0])}
-            />
-          </div>
-
-
-        </div> */}
 
         {selectedCategory !== "" && (
           <h3 className="text-xl font-bold my-10">Specifications</h3>
