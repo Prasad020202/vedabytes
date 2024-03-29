@@ -40,8 +40,8 @@ export const ProductInfo = () => {
                 <div className="">
                   <img
                     className=" w-full lg:h-[39em] rounded-lg"
-                    src="https://i.pinimg.com/736x/e4/61/f2/e461f2246b6ad93e2099d98780626396.jpg"
-                    alt=""
+                    src={product?.thumbnail_img}
+                    alt="not found"
                   />
                 </div>
               </div>
@@ -72,6 +72,7 @@ export const ProductInfo = () => {
                         </a>
                       </li>
                       <li>
+                        
                         <a href="">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

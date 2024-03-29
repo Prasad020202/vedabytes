@@ -33,6 +33,10 @@ import MyState from "./Context/Mystate.jsx";
 import { ProtectedRouteForAdmin } from "./ProtectedRoutes/AdminRoute.jsx";
 import { ProductInfo } from "./components/ProductInfo/ProductInfo.jsx";
 import { CategoryPage } from "./components/Category/CategoryPage.jsx";
+import { AddProductEx } from "./Admin/AddProductEx.jsx";
+
+
+import { PrimeReactProvider } from 'primereact/api';
 
 
 const BannerData = {
@@ -76,7 +80,6 @@ const App = () => {
   }, []);
 
   return (
-  
       <MyState>
         <BrowserRouter>
           <Routes>
@@ -96,6 +99,8 @@ const App = () => {
             <Route path="/admindashboard" element={<AdminDashboard />} />
 
             <Route path="/admindashboard/addproduct" element={<AddProductPage />} />
+            <Route path="/admindashboard/addproduct" element={<AddProductPage />} />
+            <Route path="/admindashboard/AddProductEx" element={<AddProductEx />} />
             <Route path="/admindashboard/updateproduct/:id" element={<UpdateProductPage />} />
             <Route path="/userdashboard" element={<UserDashboard />} />
             <Route path="/homeProducts" element={<HomePageProduct />} />

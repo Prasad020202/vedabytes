@@ -28,13 +28,13 @@ export const HomePageProduct = () => {
           <div className="container px-5 py-5 mx-auto">
             <div className="flex flex-wrap -m-4">
               {getAllProduct.map((item, index) => {
-                const { Product_Name, Price, Description, id } = item;
+                const { Product_Name, Price, Description, id, thumbnail_img } = item;
                 return (
                   <div key={index} className="p-4 w-full md:w-1/4">
                     <div className="h-full border border-gray-300 rounded-xl overflow-hidden shadow-md cursor-pointer" onClick={(e)=>{e.preventDefault(); navigate(`/productinfo/${id}`)}}>
                       <img
                         className="lg:h-80  h-96 w-full"
-                        src={image}
+                        src={thumbnail_img}
                         alt="blog"
                       />
                       <div className="p-6">
