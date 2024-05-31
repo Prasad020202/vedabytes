@@ -18,7 +18,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { signOut } from "firebase/auth";
 import { auth } from "../../Auth/Firebase";
 import { IoMdSearch } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import Veda from "../../assets/Vedaveda.jpg"
 import Contact from "../../assets/Contactme.png"
 
@@ -36,6 +36,23 @@ const Navcont = styled.div`
 
 export const ShiftingDropDown = () => {
   const products = useSelector((state) => state.orebiReducer.products);
+
+  const navigate = useNavigate();
+
+  
+  
+  const handleMyOrdersClick = () => {
+    if (auth) {
+      navigate('/userdashboard');
+    } else {
+      navigate('/SignIn');
+    }
+  };
+  
+
+
+
+
 
   const [click, setClick] = useState(false);
   const [basketOpen, setBasketOpen] = useState(false);
@@ -110,14 +127,14 @@ export const ShiftingDropDown = () => {
               {isOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
                   <div
-                    className="py-1"
+                    className="py-1 "
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                   >
                     <Link
                       to={"/SignIn"}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center"
                       role="menuitem"
                     >
                       Login
@@ -125,7 +142,7 @@ export const ShiftingDropDown = () => {
                   </div>
 
                   <div
-                    className="py-1"
+                    className="py-1 "
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
@@ -135,12 +152,38 @@ export const ShiftingDropDown = () => {
                         e.preventDefault();
                         handleLogOut();
                       }}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className=" w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
                       Logout
                     </button>
                   </div>
+
+                  <div
+                    className="py-1 "
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="options-menu"
+                  >
+                    {/* <Link
+                      to={"/userdashboard"}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center"
+                      role="menuitem"
+                    >
+                      My Orders
+                    </Link> */}
+                    <button
+                      onClick={handleMyOrdersClick}
+                      className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center"
+                      role="menuitem"
+                    >
+                      My Orders
+                    </button>
+                  </div>
+
+
+                  
+
                 </div>
               )}
           </div>
