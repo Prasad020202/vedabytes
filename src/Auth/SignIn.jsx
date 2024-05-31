@@ -253,13 +253,11 @@ const SignIn = () => {
                     </div>
                   </div>
                   <div>
-
                     {/* <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
                       <p class="mx-4 mb-0 text-center dark:text-white">Or</p>
                     </div> */}
 
                     {/* <div className="relative flex items-center"> */}
-                      
                       {/* <input
                         name="phoneNumber"
                         type="number"
@@ -286,9 +284,9 @@ const SignIn = () => {
                       </button>
                     </div> */}
 
-                    <div id="recaptcha"></div>
+                    {/* <div id="recaptcha"></div> */}
 
-                    {displayOTPInput && (
+                    {/* {displayOTPInput && (
                         <div className="">
                         <input
                           type="number"
@@ -301,7 +299,7 @@ const SignIn = () => {
 
                         />
                         </div>
-                    )}
+                    )} */}
 
                   </div>
                   <div className="flex items-center justify-between gap-2">

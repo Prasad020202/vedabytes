@@ -14,29 +14,16 @@ export const Modal = () => {
     HouseNo: "",
     PinCode: "",
     City: "",
+    phoneNo: ""
   });
 
-  const [prevAddress, setPrevAddress] = useState([]);
 
   const [userId, setUserId] = useState(null);
 
-  useEffect(() => {
-    const fetchAddresses = async () => {
-       if (userId) {
-         const docRef = doc(db, "users", userId);
-         const docSnap = await getDoc(docRef);
-   
-         if (docSnap.exists()) {
-           setAddress({ ...address, addresses: docSnap.data().addresses || [] });
-           setPrevAddress(docSnap.data().addresses);
-         }
-       }
-    };
-   
+  useEffect(() => {   
     onAuthStateChanged(auth, (user) => {
        if (user) {
          setUserId(user.uid);
-         fetchAddresses();
        }
     });
    }, [userId]);
@@ -47,42 +34,23 @@ export const Modal = () => {
     console.log(address);
    
     const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
-    let existingAddresses = [];
-   
-    if (docSnap.exists()) {
-       existingAddresses = docSnap.data().addresses || [];
-    }
-   
-    const newAddress = {
-       Full_Name: address.Full_Name,
-       Area_Building_Name: address.Area_Building_Name,
-       HouseNo: address.HouseNo,
-       PinCode: address.PinCode,
-       City: address.City,
-    };
-   
-    existingAddresses.push(newAddress);
-   
+
     const data = {
-       addresses: existingAddresses,
+       addresses: address,
     };
    
     await updateDoc(docRef, data)
        .then(() => {
          console.log("A New Document Field has been added to an existing document");
          // Optionally, clear the form or show a success message
-         setAddress({
-           Full_Name: "",
-           Area_Building_Name: "",
-           HouseNo: "",
-           PinCode: "",
-           City: "",
-           addresses: existingAddresses, // Update the state with the new array
-         });
-
-         navigate("/AfterCheckOut/PhoneAuth");
-
+        //  setAddress({
+        //    Full_Name: "",
+        //    Area_Building_Name: "",
+        //    HouseNo: "",
+        //    PinCode: "",
+        //    City: "",
+        //  });
+         navigate("/AfterCheckOut/Payment");
        })
        .catch((error) => {
          console.log(error);
@@ -123,6 +91,15 @@ export const Modal = () => {
               <form>
                 {/* Sender section */}
                 <div className="px-5 pb-5">
+                  <input
+                    placeholder="Enter Phone Number"
+                    className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                    value={address.phoneNo}
+                    onChange={(e) => {
+                      setAddress({ ...address, phoneNo: e.target.value });
+                    }}
+                  />
+
                   <input
                     placeholder="Enter Full Name"
                     className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
