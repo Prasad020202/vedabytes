@@ -29,7 +29,7 @@ import UpdateProductPage from "./Admin/UpdateProductPage.jsx";
 import { UserDashboard } from "./components/User/UserDashboard.jsx";
 
 import { HomePageProduct } from "./components/HomePageProduct/HomePageProduct.jsx";
-import MyState from "./Context/Mystate.jsx";
+import MyState from "./Context/MyState.jsx";
 import { ProtectedRouteForAdmin } from "./ProtectedRoutes/AdminRoute.jsx";
 import { ProductInfo } from "./components/ProductInfo/ProductInfo.jsx";
 import { CategoryPage } from "./components/Category/CategoryPage.jsx";
@@ -41,6 +41,11 @@ import ProductDetail from "./components/ProductDetails/ProductDetail.jsx"
 import Shoppage from "./components/Shop/Shop.jsx";
 import Testcard from "./Testcard.jsx";
 import Shop from "./components/Shop/Shop.jsx";
+import { Test2 } from "./components/Test2.jsx";
+import { Modal } from "./components/TempAfterCheckOut/Modal.jsx";
+import { PhoneAuth } from "./components/TempAfterCheckOut/PhoneAuth.jsx";
+import { Payment } from "./components/TempAfterCheckOut/Payment.jsx";
+import { Summary } from "./components/TempAfterCheckOut/Summary.jsx";
 
 
 
@@ -95,18 +100,10 @@ const App = () => {
             <Route path="/*" element={<NotFound />} />
 
 
-            <Route path="/Productdetails" element={<ProductDetail />} />
+            <Route path="/Productdetails/:id" element={<ProductDetail />} />
            <Route path="/Shoppage" element={<Shoppage />} />
            <Route path="/test" element={<Testcard />} />
-          <Route path="/test1" element={<Shop />} />
-
-            {/* <Route  path="/admindashboard" element={
-              <ProtectedRouteForAdmin>
-            <AdminDashboard />
-            </ProtectedRouteForAdmin>
-            }>
-    
-            </Route> */}
+          <Route path="/productlist/:category" element={<Shop />} />
   
             <Route path="/admindashboard" element={<AdminDashboard />} />
 
@@ -116,6 +113,16 @@ const App = () => {
             <Route path="/homeProducts" element={<HomePageProduct />} />
             <Route path="/productinfo/:id" element={<ProductInfo />} />
             <Route path="/category/:categoryname" element={<CategoryPage />} />  {/* category Page route  */}
+
+            <Route path="/test2" element={<Test2/>}/>
+
+
+            <Route path="/AfterCheckOut/Modal" element={<Modal/>}/>
+            <Route path="/AfterCheckOut/PhoneAuth" element={<PhoneAuth/>}/>
+
+            <Route path="/AfterCheckOut/Payment" element={<Payment/>}/>
+
+            <Route path="/AfterCheckOut/Summary" element={<Summary/>}/>
           </Routes>
         </BrowserRouter>
       </MyState>

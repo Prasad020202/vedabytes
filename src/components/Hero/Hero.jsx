@@ -4,6 +4,7 @@ import Image1 from "../../assets/hero/desktop.png";
 import Image2 from "../../assets/category/vr.png";
 import Image3 from "../../assets/category/macbook.png";
 import Button from "../Shared/Button";
+import { useNavigate } from "react-router-dom";
 
 const HeroData = [
   {
@@ -12,13 +13,15 @@ const HeroData = [
     subtitle: "Beats Solo",
     title: "Branded",
     title2: "Desktops",
+    keyword: "Desktops"
   },
   {
     id: 2,
-    img: Image2,
+    img: Image3,
     subtitle: "Beats Solo",
-    title: "Wireless",
+    title: "Branded",
     title2: "Printers",
+    keyword: "Printer"
   },
   {
     id: 3,
@@ -26,10 +29,14 @@ const HeroData = [
     subtitle: "Beats Solo",
     title: "Branded",
     title2: "Laptops",
+    keyword: "Laptop"
   },
 ];
 
 const Hero = ({ handleOrderPopup }) => {
+
+  const navigate = useNavigate();
+
   const settings = {
     // dots: true,  // Show navigation dots
     arrows: false,
@@ -45,7 +52,7 @@ const Hero = ({ handleOrderPopup }) => {
   return (
     <div className="container">
       <div
-        className="overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center items-center
+        className="overflow-hidden rounded-3xl min-h-[350px] sm:min-h-[450px] hero-bg-color flex justify-center items-center
 "
       >
         <div className="container pb-8 sm:pb-0">
@@ -86,12 +93,15 @@ const Hero = ({ handleOrderPopup }) => {
                       data-aos-duration="500"
                       data-aos-delay="300"
                     >
-                      <Button
-                        text="Shop By Category"
-                        bgColor="bg-primary"
-                        textColor="text-white"
-                        handler={handleOrderPopup}
-                      />
+                      <button onClick={() => {navigate(`/productlist/${data.keyword}`)}}>
+                        <Button
+                          text="Shop By Category"
+                          bgColor="bg-primary"
+                          textColor="text-white"
+                          handler={handleOrderPopup}
+                        />
+                      </button>
+                    
                     </div>
                   </div>
                   {/* Img section */}

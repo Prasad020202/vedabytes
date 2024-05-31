@@ -6,9 +6,9 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from "react-icons/fa6";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import BasketToggle from"../Basket/BasketToggle";
+import BasketToggle from "../Basket/BasketToggle";
 import { useSelector } from "react-redux";
-
+import Itemsdropdown from "./ShiftingDropDown.jsx";
 
 const section = styled.section`
   width: 100vw;
@@ -19,13 +19,14 @@ const NavBar = styled.nav`
   justify-content: space-between;
   align-items: center;
   width: 85%;
-  height: 5rem;
+  height: 4.5rem;
   margin: 0 auto;
 
   .mobile {
     display: none;
   }
   @media (max-width: 64em) {
+    height: 5rem;
     .desktop {
       display: none;
     }
@@ -62,6 +63,13 @@ const Menu = styled.ul`
     justify-content: center;
   }
 `;
+const Logocontainer = styled.ul`
+  @media (max-width: 64em) {
+    width: 40%;
+    display: flex;
+    /* background-color: azure; */
+  }
+`;
 const MenuItems = styled.li`
   margin: 0 1rem;
   color: black;
@@ -86,6 +94,15 @@ const MenuItems = styled.li`
     }
   }
 `;
+const Navrightrespon = styled.div`
+  display: none;
+
+  @media (max-width: 64em) {
+    display: block;
+    display: flex;
+    align-items: center;
+  }
+`;
 
 const HamburgerMenu = styled.span`
   width: ${(props) => (props.click ? "2rem" : "1.5rem")};
@@ -93,8 +110,8 @@ const HamburgerMenu = styled.span`
   background: black;
 
   position: absolute;
-  top: 2rem;
-  left: 50%;
+  top: 2.5rem;
+  left: 52%;
   transform: ${(props) =>
     props.click
       ? "translateX(-50%) rotate(90deg)"
@@ -132,10 +149,7 @@ const HamburgerMenu = styled.span`
 `;
 
 const Navigation = () => {
-
   const products = useSelector((state) => state.orebiReducer.products);
-
-
 
   const [click, setClick] = useState(false);
   const [basketOpen, setBasketOpen] = useState(false);
@@ -163,25 +177,54 @@ const Navigation = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     console.log("log out");
-    signOut(auth)
-    setIsOpen(false)
-  }
+    signOut(auth);
+    setIsOpen(false);
+  };
 
   return (
     <section id="navigation">
       <NavBar>
-        <Logol />
+        <Logocontainer>
+          <Logol />
+        </Logocontainer>
         <HamburgerMenu click={click} onClick={() => setClick(!click)}>
           &nbsp;
         </HamburgerMenu>
+
+        <Navrightrespon>
+          <button className="relative p-3" type="button">
+            <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
+
+            <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
+              0
+            </div>
+          </button>
+          <div>
+            <AiOutlineUser />
+          </div>
+        </Navrightrespon>
         <Menu click={click}>
-          <MenuItems onClick={() => scrollTo("Home")}>Best Sellers</MenuItems>
+          {/* <MenuItems onClick={() => scrollTo("Home")}>Best Sellers</MenuItems>
           <MenuItems onClick={() => scrollTo("About")}>Laptops</MenuItems>
           <MenuItems onClick={() => scrollTo("Roadmap")}>Printers</MenuItems>
           <MenuItems onClick={() => scrollTo("Roadmap")}>Desktops</MenuItems>
-          <MenuItems onClick={() => scrollTo("Roadmap")}>Accesories</MenuItems>
+          <MenuItems onClick={() => scrollTo("Roadmap")}>Accesories</MenuItems> */}
+
+          {/* <MenuItems onClick={() => scrollTo("Home")}>Best Sellers</MenuItems>
+          <MenuItems onClick={() => scrollTo("About")}>About Us</MenuItems>
+
+          <MenuItems onClick={() => scrollTo("About")}>Shop</MenuItems> */}
+
+          {/* <MenuItems onClick={() => scrollTo("About")}>Laptops</MenuItems>
+          <MenuItems onClick={() => scrollTo("Roadmap")}>Printers</MenuItems>
+          <MenuItems onClick={() => scrollTo("Roadmap")}>Desktops</MenuItems>
+          <MenuItems onClick={() => scrollTo("Roadmap")}>Accesories</MenuItems> */}
+          <Itemsdropdown />
+
+          {/* <MenuItems onClick={() => scrollTo("About")}>Blogs</MenuItems>
+          <MenuItems onClick={() => scrollTo("About")}>Contact</MenuItems> */}
 
           <MenuItems>
             <div className="mobile">
@@ -205,8 +248,8 @@ const Navigation = () => {
                 </div>
 
                 {/* Order-button section */}
-                
-              <button
+
+                {/* <button
                 className="relative p-3"
                 
                 
@@ -225,26 +268,18 @@ const Navigation = () => {
                   
                 
 
-              </button>
+              </button> */}
 
-
-
-
-
-
-
-   
-           
-                
                 {/* Profile section */}
 
-                <div>
+                {/* <div>
                   <AiOutlineUser />
-                </div>
+                </div> */}
               </div>
             </div>
           </MenuItems>
         </Menu>
+
         <div className="desktop">
           {/* <Link to="/auth/Login"> */}
 
@@ -273,34 +308,27 @@ const Navigation = () => {
               </div>
             </button> */}
 
+            <div>
+              <button
+                className="relative p-3"
+                type="button"
+                onClick={toggleBasket}
+              >
+                <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
+                <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
+                  {/* You may replace this with the actual count of items in the basket */}
+                  {/* 0 */}
 
+                  {products.length}
+                </div>
+              </button>
 
-<div>
-      <button
-        className="relative p-3"
-        type="button"
-        onClick={toggleBasket}
-      >
-        <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
-        <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-           {/* You may replace this with the actual count of items in the basket */}
-           {/* 0 */}
-
-           {products.length}
-
-
-
-        </div>
-      </button>
-
-      {/* Render the BasketToggle component */}
-      <BasketToggle isOpen={basketOpen} onClose={() => setBasketOpen(false)} />
-    </div>
-
-
-
-
-
+              {/* Render the BasketToggle component */}
+              <BasketToggle
+                isOpen={basketOpen}
+                onClose={() => setBasketOpen(false)}
+              />
+            </div>
 
             {/* Profile section */}
 
@@ -318,13 +346,12 @@ const Navigation = () => {
                     aria-labelledby="options-menu"
                   >
                     <Link
-                     to={"/SignIn"}
+                      to={"/SignIn"}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
                       Login
                     </Link>
-                    
                   </div>
 
                   <div
@@ -334,16 +361,15 @@ const Navigation = () => {
                     aria-labelledby="options-menu"
                   >
                     <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogOut();
-                    }}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLogOut();
+                      }}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
                       Logout
                     </button>
-                    
                   </div>
                 </div>
               )}

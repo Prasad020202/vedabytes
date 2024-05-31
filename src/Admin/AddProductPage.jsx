@@ -3,7 +3,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db, storage } from "../Auth/Firebase";
 import { toast } from "react-toastify";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { MuiChipsInput } from 'mui-chips-input'
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 export const AddProductPage = () => {
   const navigate = useNavigate();
@@ -24,7 +30,7 @@ export const AddProductPage = () => {
 
   const [productImgThumbnail, setProductImgThumbnail] = useState(null);
 
-  const[imgCollection, setImgCollection] = useState([]);
+  const [imgCollection, setImgCollection] = useState([]);
 
   // Function to handle category selection
   const handleCategoryChange = (event) => {
@@ -546,135 +552,128 @@ export const AddProductPage = () => {
     }
   };
 
+  const [uploadImages, setUploadImages] = useState();
+
   const SubmitHandler = async (e) => {
     e.preventDefault();
 
-    // Wait for the image upload to complete
-    await submitImage();
+    console.log("Hello Bhau");
 
-    await submitMultipleImage();
+    if (productImgThumbnail === null) {
+      alert("Please select an image");
+      return;
+    }
+
+    const imageRef = ref(
+      storage,
+      `products_images/${productImgThumbnail.name}`
+    );
 
     try {
-      const productRef = collection(db, "Products");
-      await addDoc(productRef, product);
+  
+      // Upload the single image and get the download URL
+      const singleImageRef = ref(
+        storage,
+        `products_images/${productImgThumbnail.name}`
+      );
+      const singleSnapshot = await uploadBytes(
+        singleImageRef,
+        productImgThumbnail
+      );
+      const singleUrl = await getDownloadURL(singleImageRef);
+      console.log("Single image URL:", singleUrl);
+
+      // Upload multiple images and get their download URLs
+      const multipleImageLinks = await uploadMultipleImages();
+      console.log("Multiple image URLs:", multipleImageLinks);
+
+      // Update the product state with the image URLs
+      const updatedInputName = {
+        ...product,
+        thumbnail_img: singleUrl,
+        img_collection: multipleImageLinks,
+      };
+      setProduct(updatedInputName);
+
+      // Now store the updated state to firestore db
+      const productRef = collection(db, "Products_info");
+      const docRef = await addDoc(productRef, updatedInputName);
+      console.log("Document has been added successfully");
+      console.log(docRef.id);
+
+      // Reset the form
       setProduct({
-        // Reset the form
         Product_Name: "",
         Brand: "",
         category: "",
         Description: "",
         Price: "",
-        keywords: "",
+        keywords: [],
         thumbnail_img: "",
         img_collection: [],
         specifications: {},
       });
+
       navigate("/admindashboard");
     } catch (error) {
       console.log(error);
-      toast.error("Add Product Failed");
     }
   };
-
-  // only for production it should add up with submitHandler function
-
-  const submitImage = async () => {
-    // e.preventDefault();
-
-    if (!productImgThumbnail) {
-      alert("Add Image First!");
-      return;
-    }
-
-    // Validate file type and size (optional)
-    const fileType = productImgThumbnail.type;
-    const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
-    if (!validImageTypes.includes(fileType)) {
-      alert("Please select a valid image file (gif, jpeg, png).");
-      return;
-    }
-
-    // Generate a unique ID for the image
-    const uniqueId = Math.random().toString(36).substring(2);
-
-    // Create a reference to the location in Firebase Storage
-    const imgRef = ref(storage, `products/${uniqueId}`);
-
-    // Upload the image
-    const uploadTask = uploadBytesResumable(imgRef, productImgThumbnail);
-
-    // Wait for the upload to complete
-    await new Promise((resolve, reject) => {
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // You can use this section to display upload progress
-        },
-        (error) => {
-          // Handle unsuccessful uploads
-          console.error(error);
-          alert("Failed to upload image. Please try again.");
-          reject(error);
-        },
-        () => {
-          // Handle successful uploads on complete
-          console.log("Upload completed successfully");
-          resolve();
-        }
-      );
-    });
-
-    // Get the download URL
-    const downloadLink = await getDownloadURL(imgRef);
-
-    // Update the product state with the thumbnail image URL
-    setProduct({ ...product, thumbnail_img: downloadLink });
-
-    console.log("new products" + product.thumbnail_img);
-  };
-
-  const AddMultipleImages = async(e) => {
-
-    setImgCollection(oldArray => [...oldArray, e.target.files]);
-    console.log(imgCollection.length);
-
-    submitMultipleImage(imgCollection.length)
-  }
 
   const submitMultipleImage = async () => {
     const uploadPromises = imgCollection.map(async (imgFile) => {
-       const uniqueId = Math.random().toString(36).substring(2);
-       const imgRef = ref(storage, `products/${uniqueId}`);
-       const uploadTask = uploadBytesResumable(imgRef, imgFile);
-   
-       await new Promise((resolve, reject) => {
-         uploadTask.on(
-           "state_changed",
-           (snapshot) => {
-             // You can use this section to display upload progress
-           },
-           (error) => {
-             console.error(error);
-             alert("Failed to upload image. Please try again.");
-             reject(error);
-           },
-           () => {
-             console.log("Upload completed successfully");
-             resolve();
-           }
-         );
-       });
-   
-       return getDownloadURL(imgRef);
+      const uniqueId = Math.random().toString(36).substring(2);
+      const imgRef = ref(storage, `products/${uniqueId}`);
+      const uploadTask = uploadBytesResumable(imgRef, imgFile);
+
+      await new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // You can use this section to display upload progress
+          },
+          (error) => {
+            console.error(error);
+            alert("Failed to upload image. Please try again.");
+            reject(error);
+          },
+          () => {
+            console.log("Upload completed successfully");
+            resolve();
+          }
+        );
+      });
+
+      return getDownloadURL(imgRef);
     });
-   
+
     const imgUrls = await Promise.all(uploadPromises);
-   
+
     // Update the product state with the image collection URLs
     setProduct({ ...product, img_collection: imgUrls });
-   };
-   
-   
+  };
+
+  const uploadMultipleImages = async () => {
+    const uploadPromises = uploadImages.map(async (imgFile) => {
+      console.log("Uploading file:", imgFile.name); // Debugging line
+      const imgRef = ref(storage, `products_images/${imgFile.name}`);
+      await uploadBytes(imgRef, imgFile);
+      const imgUrl = await getDownloadURL(imgRef);
+      console.log("Uploaded file URL:", imgUrl); // Debugging line
+      return imgUrl;
+    });
+
+    const imgUrls = await Promise.all(uploadPromises);
+    return imgUrls;
+  };
+
+  const [chips, setChips] = useState([])
+
+  const handleChange = (newChips) => {
+    setChips(newChips)
+    setProduct({...product, keywords: newChips})
+  }
+
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -782,7 +781,7 @@ export const AddProductPage = () => {
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div class="w-full px-3 mb-6 md:mb-0">
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               for="grid-city"
@@ -805,19 +804,23 @@ export const AddProductPage = () => {
             />
           </div>
 
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        </div>
+
+        <div>
+        <div class="w-full  px-3 mb-6 md:mb-0">
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               for="grid-zip"
             >
               Keywords
             </label>
-            <input
+            {/* <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-zip"
               type="text"
               placeholder="90210"
-            />
+            /> */}
+            <MuiChipsInput value={chips} onChange={handleChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
           </div>
         </div>
 
@@ -872,8 +875,10 @@ export const AddProductPage = () => {
                 </div>
                 <input
                   id="dropzone-file"
+                  name=""
+                  accept="image/png,image/jpeg"
                   type="file"
-                  class="hidden"
+                  class=" hidden"
                   onChange={(e) => {
                     setProductImgThumbnail(e.target.files[0]);
                   }}
@@ -897,7 +902,9 @@ export const AddProductPage = () => {
               id="file_input"
               type="file"
               multiple
-              onChange={(e) => {AddMultipleImages(e)}}
+              onChange={(e) => {
+                setUploadImages(Array.from(e.target.files));
+              }}
             />
             <p
               class="mt-1 text-sm text-gray-500 dark:text-gray-300"

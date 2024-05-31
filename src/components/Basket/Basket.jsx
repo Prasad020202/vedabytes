@@ -4,8 +4,10 @@ import CartItem from './Cartitem';
 import { FiTrash2 } from "react-icons/fi";
 import { IoMdArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { resetCart } from "../../redux/orebiSlice";
+import { auth } from '../../Auth/Firebase';
+import { LogoDevRounded } from '@mui/icons-material';
 
 
 
@@ -161,6 +163,11 @@ const CheckoutButton = styled.button`
 
 
 const BasketToggle = ({ isOpen, onClose, subTotal }) => {
+
+  const navigate = useNavigate();
+
+  const [ user, setUser] = useState(null);
+
   const basketRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -179,6 +186,24 @@ const BasketToggle = ({ isOpen, onClose, subTotal }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen]);
+
+  const isUserOnline = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        
+        navigate("/signup")
+        // ...
+        
+      } else {
+        navigate("/signin")
+      }
+    });
+
+    // console.log("Get clicked");
+    
+  }
 
   return (
     <StyledCartContent isOpen={isOpen} ref={basketRef}>
@@ -211,7 +236,8 @@ const BasketToggle = ({ isOpen, onClose, subTotal }) => {
       <Subtotal>
         Subtotal: <span>{subTotal}</span>
       </Subtotal>
-      <CheckoutButton>Checkout</CheckoutButton>
+
+      <CheckoutButton><button onClick={isUserOnline}>Checkout</button></CheckoutButton>
     </CartFooter>
 
 

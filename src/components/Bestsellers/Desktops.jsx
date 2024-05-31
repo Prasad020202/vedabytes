@@ -1,54 +1,39 @@
-import { Link } from 'react-router-dom';
-import Product from './Product';
-import mac from "../Productscards/macbook.jpg"; 
-
+import { Link } from "react-router-dom";
+import Product from "./Product";
+import mac from "../Productscards/macbook.jpg";
+import { useContext } from "react";
+import MyContext from "../../Context/MyContext";
 
 const Desktops = () => {
+  const context = useContext(MyContext);
+  const { getAllProduct } = context;
 
+  const filteredProducts = getAllProduct.filter(
+    (product) => product.category === "Desktops"
+  );
 
-    return (
-      <div className="mb-10 mx-28">
-       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 place-items-center">
-       
-        <Product
+  return (
+    <div className="mb-10 mx-28">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 place-items-center">
+        {filteredProducts.slice(0, 8).map((item, index) => {
+          const { id, Brand, Description, Price, Product_Name, thumbnail_img } =
+            item;
+          return (
+            <>
+              <Product
+                _id={id}
+                img={thumbnail_img}
+                productName={Product_Name}
+                price={Price}
+                badge={true}
+              />
+            </>
+          );
+        })}
 
-        _id="100005"
-        img={mac}
-        productName="HP"
-        price="650.00"
-        badge={true}
-        
-        
-        />
+      </div>
+    </div>
+  );
+};
 
-
-        <Product
-
-        _id="100006"
-        img={mac}
-        productName="DELL"
-        price="400.00"
-        badge={true}
-
-
-        />
-        <Product
-
-          _id="100007"
-          img={mac}
-          productName="Asus"
-          price="550.00"
-          badge={true}
-
-
-          />
-        
-        
-  
-  
-  
-      </div></div>
-    );
-  };
-  
-  export default Desktops;
+export default Desktops;

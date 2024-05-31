@@ -4,9 +4,12 @@ import CartItem from './Cartitem';
 import { FiTrash2 } from "react-icons/fi";
 import { IoMdArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { resetCart } from "../../redux/orebiSlice";
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../Auth/Firebase';
+import Modal from './AfterCheckOut/Modal';
+// import Buttonnew from "./Buttonnew"
 
 
 
@@ -161,6 +164,9 @@ const CheckoutButton = styled.button`
 
 
 const BasketToggle = ({ isOpen, onClose }) => {
+
+  const navigate = useNavigate();
+
   const basketRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -173,6 +179,8 @@ const BasketToggle = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.orebiReducer.products);
   const [totalAmt, setTotalAmt] = useState("");
+
+  const[ModalOpen ,setModalOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -193,6 +201,27 @@ const BasketToggle = ({ isOpen, onClose }) => {
     });
     setTotalAmt(price);
   }, [products]);
+
+  const isUserOnline = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        console.log(user);
+
+        navigate("/AfterCheckOut/Modal")
+        
+        // setModalOpen(true);
+        // ...
+        
+      } else {
+        navigate("/signin")
+      }
+    });
+
+    // console.log("Get clicked");
+    
+  }
 
   return (
     <StyledCartContent isOpen={isOpen} ref={basketRef}>
@@ -234,8 +263,11 @@ const BasketToggle = ({ isOpen, onClose }) => {
       </Subtotal>
 
 
+      {/* <CheckoutButton onClick={openmodal}>Checkout</CheckoutButton> */}
+      <CheckoutButton ><button onClick={isUserOnline}>Checkout</button></CheckoutButton>
 
-      <CheckoutButton>Checkout</CheckoutButton>
+      
+      {/* <Buttonnew/> */}
     </CartFooter>
 
 

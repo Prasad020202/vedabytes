@@ -26,15 +26,21 @@ import styled from "styled-components";
 import Lappy from "./components/Bestsellers/Lappy.jsx"
 import Print from "./components/Bestsellers/Print.jsx";
 import Desktops from "./components/Bestsellers/Desktops.jsx";
+import Itemdrop from "./components/Navbar/ShiftingDropDown.jsx"
+
 
 
 const Navcont=styled.div`
 z-index: 11;
+margin: 15px 0;
+
   
 
   position: sticky;
   top: 0;
   background-color: white;
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
+  
   
 `
 
@@ -48,22 +54,36 @@ const BannerData = {
     title4:
       "Click the Button below to see all the products",
     bgColor: "#f42c37",
+    key: "Laptop"
   };
   
   const BannerData2 = {
-    discount: "30% OFF",
-    title: "Happy Hours",
-    date: "14 Jan to 28 Jan",
-    image: smartwatch2,
-    title2: "Smart Solo",
-    title3: "Winter Sale",
+    discount: "Bestsellers",
+    title: "Printers",
+    date: "This Month",
+    
+    title2: "Bestselling Printers for this month , grab this opportunity fast",
+    title3: "Summer Sale",
     title4:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque reiciendis",
+      "Click the Button below to see all the products",
     bgColor: "#2dcc6f",
+    key: "Printer"
+  };
+  const BannerData3 = {
+    discount: "Bestsellers",
+    title: "Refurbished Desktops",
+    date: "This Month",
+    image: Laptop,
+    title2: "Bestselling Desktops for this month , grab this opportunity fast",
+    title3: "Summer Sale",
+    title4:
+      "Click the Button below to see all the products",
+    bgColor: "#1b1414",
+    key: "Desktops"
   };
 
 const Landing = () => {
-    const [orderPopup, setOrderPopup] = React.useState(false);
+    const [orderPopup, setOrderPopup] = React.useState(true);
 
     const handleOrderPopup = () => {
       setOrderPopup(!orderPopup);
@@ -85,12 +105,18 @@ const Landing = () => {
 
   return (
     <>
-    <Navcont><Navbar handleOrderPopup={handleOrderPopup} /></Navcont>
+    <Navcont>
+      {/* <Navbar handleOrderPopup={handleOrderPopup} /> */}
+      <Itemdrop/>
+    </Navcont>
+
+    <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
+
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
     
     <Hero handleOrderPopup={handleOrderPopup} />
     <Category />
-    <Category2 />
+    {/* <Category2 /> */}
     <Services />
     <Banner data={BannerData} />
     {/* <Products /> */}
@@ -109,7 +135,7 @@ const Landing = () => {
 
     <Print/>
 
-    <Banner data={BannerData} />
+    <Banner data={BannerData3} />
     {/* <Products /> */}
     {/* <ProductCard/> */}
 

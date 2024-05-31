@@ -10,6 +10,7 @@ import styled from "styled-components";
 import Mac from "../Productscards/macbook.jpg";
 import { useDispatch } from "react-redux"; // Import useDispatch hook
 import { addToCart, deleteItem } from "../../redux/orebiSlice";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -240,6 +241,9 @@ const Contents = styled.div`
 
 
 const Product = (props, { item }) => {
+
+  const navigate = useNavigate();
+  
   const [isBuyClicked, setIsBuyClicked] = useState(false);
   //   const [isRemoveClicked, setIsRemoveClicked] = useState(false);
   const dispatch = useDispatch();
@@ -261,11 +265,8 @@ const Product = (props, { item }) => {
     dispatch(deleteItem(product._id));
   };
   const handleProductDetails = () => {
-    navigate(`/product/${rootId}`, {
-      state: {
-        item: productItem,
-      },
-    });
+    navigate(`/Productdetails/${props._id}`);
+    console.log("Hello");
   };
 
 
@@ -273,7 +274,7 @@ const Product = (props, { item }) => {
   return (
     <Wrapper>
       <Container>
-        <div className="top">
+        <div className="top"  onClick={handleProductDetails}>
           <img src={props.img} />
         </div>
         <div className={`bottom ${isBuyClicked ? "clicked" : ""}`}>
@@ -282,7 +283,9 @@ const Product = (props, { item }) => {
               <h1>{props.productName}</h1>
               <p>Rs.{props.price}</p>
             </div>
-            <div className="buy" onClick={handleBuyClick}>
+            <div className="buy" 
+            // onClick={handleBuyClick}
+            >
               <i className="material-icons">
                 <AddShoppingCartOutlinedIcon
                   className="material-icons"
@@ -343,14 +346,22 @@ const Product = (props, { item }) => {
         <Contents className="contents">
           <table>
             <tr>
-              <th>Width</th>
-              <th>Height</th>
+              <th>RAM</th>
+              <th>Processor</th>
             </tr>
             <tr>
-              <td>3000mm</td>
-              <td>4000mm</td>
+              <td>4GB</td>
+              <td>Intel</td>
             </tr>
             <tr>
+              <th>Display</th>
+              <th>Storage</th>
+            </tr>
+            <tr>
+              <td>14-inch HD</td>
+              <td>2 TB</td>
+            </tr>
+            {/* <tr>
               <th>Something</th>
               <th>Something</th>
             </tr>
@@ -365,15 +376,7 @@ const Product = (props, { item }) => {
             <tr>
               <td>200mm</td>
               <td>200mm</td>
-            </tr>
-            <tr>
-              <th>Something</th>
-              <th>Something</th>
-            </tr>
-            <tr>
-              <td>200mm</td>
-              <td>200mm</td>
-            </tr>
+            </tr> */}
           </table>
         </Contents>
       </Inside>

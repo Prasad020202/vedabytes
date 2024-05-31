@@ -1,14 +1,26 @@
 import { Password } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { auth, db } from "./Firebase";
 import {
   GoogleAuthProvider,
+  RecaptchaVerifier,
   signInWithEmailAndPassword,
+  signInWithPhoneNumber,
   signInWithPopup,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { QuerySnapshot, collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
+import {
+  QuerySnapshot,
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { toast } from "react-toastify";
+import MyContext from "../Context/MyContext";
+import PhoneInput from "react-phone-input-2";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -19,14 +31,19 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [error, setErrorMsg] = useState("");
 
-  const handleSubmission = async(e) => {
+  const context = useContext(MyContext);
+  const { setUserID, userID } = context;
+
+  const handleSubmission = async (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
-      .then(async(userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
 
         const userID = userCredential.user.uid;
+
+        setUserID(userCredential.user.uid);
 
         const docRef = doc(db, "users", userID);
 
@@ -34,15 +51,13 @@ const SignIn = () => {
 
         const role = docData.data().role;
 
-        if(role == "USER"){
-          console.log("user it is");
-          navigate("/userdashboard")
-        }else{
+        if (role == "USER") {
+          console.log("user it is" + userID);
+          navigate("/");
+        } else {
           console.log("admin it is");
-          navigate("/admindashboard")
+          navigate("/admindashboard");
         }
-        
-
       })
       .catch((error) => {
         setErrorMsg(error.message);
@@ -55,11 +70,10 @@ const SignIn = () => {
 
     //   try {
     //     const q = query(
-    //               collection(db, "users"), 
+    //               collection(db, "users"),
     //               where('uid', '==', users?.user?.uid)
     //               );
-        
-        
+
     //     const data = onSnapshot(q, (QuerySnapshot) => {
     //       let user;
 
@@ -73,7 +87,7 @@ const SignIn = () => {
     //       }else{
     //         navigate("/admindashboard")
     //       }
-    //     })          
+    //     })
     //   } catch (error) {
     //     console.log(error);
     //   }
@@ -98,7 +112,7 @@ const SignIn = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        setErrorMsg(errorMessage)
+        setErrorMsg(errorMessage);
         // The email of the user's account used.
         const email = error.customData.email;
         // The AuthCredential type that was used.
@@ -107,6 +121,59 @@ const SignIn = () => {
       });
   };
 
+  const [inputNo, setInputNo] = useState("");
+  const [confirmation, setConfirmation] = useState(null); // New state for confirmation
+  const [inputOTP, setInputOTP] = useState("");
+  const[displayOTPInput, setDisplayOTPInput] = useState(false);
+
+  const sendOTP = async (e) => {
+    e.preventDefault();
+
+    setDisplayOTPInput(true);
+
+    try {
+      const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
+
+      const confirmationResult = await signInWithPhoneNumber(
+        auth,
+        inputNo,
+        recaptcha
+      );
+
+      setConfirmation(confirmationResult); // Set the confirmation object
+    } catch (error) {
+      console.log(error);
+    }
+ };
+
+//  const verifyOTP = async () => {
+//   try {
+//      if (!confirmation) {
+//        console.log("No confirmation object available");
+//        return;
+//      }
+ 
+//      const data = await confirmation.confirm(inputOTP);
+//      console.log(data.user.phoneNumber);
+ 
+//      // Update the user's document in Firestore to include the phone number
+//      const userDocRef = doc(db, "users", userId); // Assuming 'userId' is the user's ID in Firestore
+//      const userDocUpdate = {
+//        phoneNumber: data.user.phoneNumber, // Update the phoneNumber field in the user's document
+//      };
+ 
+//      await updateDoc(userDocRef, userDocUpdate)
+//        .then(() => {
+//          console.log("Phone number is added to the user's document in Firestore.");
+//          navigate("/AfterCheckOut/Payment");
+//        })
+//        .catch((error) => {
+//          console.log("Error updating the user's document:", error);
+//        });
+//   } catch (error) {
+//      console.log("Error verifying OTP:", error);
+//   }
+//  };
 
   return (
     <>
@@ -185,6 +252,55 @@ const SignIn = () => {
                       </svg>
                     </div>
                   </div>
+                  <div>
+                    <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
+                      <p class="mx-4 mb-0 text-center dark:text-white">Or</p>
+                    </div>
+
+                    <div className="relative flex items-center">
+                      {/* <input
+                        name="phoneNumber"
+                        type="number"
+                        required
+                        className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#333]"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                      /> */}
+                      <PhoneInput
+                        country={"in"}
+                        value={inputNo}
+                        onChange={(inputNo) => setInputNo("+" + inputNo)}
+                      />
+                      <button
+                        type="button"
+                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-small rounded-md ml-1 text-sm px-9 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                        onClick={sendOTP}
+                      >
+                        Verify
+                      </button>
+                    </div>
+
+                    <div id="recaptcha"></div>
+
+                    {displayOTPInput && (
+                        <div className="">
+                        <input
+                          type="number"
+                          name=""
+                          id=""
+                          placeholder="Enter OTP"
+                          className=" w-full teullxt-sm border border-gray-300 px-4 py-2 rounded-md outline-[#333]"
+                          value={inputOTP}
+                          onChange={(e) => setInputOTP(e.target.value)}
+
+                        />
+                        </div>
+                    )}
+
+                  </div>
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center">
                       <input
@@ -215,7 +331,7 @@ const SignIn = () => {
                       className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-black focus:outline-none"
                       onClick={handleSubmission}
                     >
-                      Log in
+                      Verify & Log in
                     </button>
                   </div>
                   <p className="text-sm !mt-10 text-center">

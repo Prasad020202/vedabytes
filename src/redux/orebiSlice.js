@@ -96,5 +96,6 @@ export const {
   resetCart,
   toggleBrand,
   toggleCategory,
+  products
 } = orebiSlice.actions;
 export default orebiSlice.reducer;

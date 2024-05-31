@@ -15,11 +15,13 @@ function myState({ children }) {
   const [getAllProduct, setGetAllProduct] = useState([]);
   const [getAllUser, setGetAllUser] = useState([]);
 
+  const[userID, setUserID] = useState(null);
+
   /**========================================================================
    *========================================================================**/
 
   const getAllProductFunction = async () => {
-    const querySnapshot = await getDocs(collection(db, "Products"));
+    const querySnapshot = await getDocs(collection(db, "Products_info"));
 
     let productArray = [];
     
@@ -56,7 +58,9 @@ function myState({ children }) {
     <MyContext.Provider
       value={{
         getAllProduct,
-        getAllUser
+        getAllUser,
+        userID,
+        setUserID
       }}
     >
       {children}
