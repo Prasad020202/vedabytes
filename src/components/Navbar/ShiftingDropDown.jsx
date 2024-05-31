@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   FiArrowRight,
   FiBarChart2,
@@ -17,6 +19,9 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../Auth/Firebase";
 import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Veda from "../../assets/Vedaveda.jpg"
+import Contact from "../../assets/Contactme.png"
+
 
 const Logocontainer = styled.div`
   display: flex;
@@ -65,14 +70,14 @@ export const ShiftingDropDown = () => {
 
         <Rightside>
           {/* add searchbar and login icon */}
-          <div className="relative group hidden sm:block">
+          {/* <div className="relative group hidden sm:block">
               <input
                 type="text"
                 placeholder="Search"
                 className="search-bar"
               />
               <IoMdSearch className="text-xl text-gray-600 group-hover:text-primary dark:text-gray-400 absolute top-1/2 -translate-y-1/2 right-3 duration-200" />
-            </div>
+            </div> */}
 
 
           <div>
@@ -150,6 +155,7 @@ export default ShiftingDropDown;
 const Tabs = () => {
   const [selected, setSelected] = useState(null);
   const [dir, setDir] = useState(null);
+  const navigate = useNavigate();
 
   const handleSetSelected = (val) => {
     if (typeof selected === "number" && typeof val === "number") {
@@ -341,6 +347,7 @@ const Products = () => {
 };
 
 const Pricing = () => {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-3 gap-4 divide-x divide-neutral-700">
       <a
@@ -350,13 +357,19 @@ const Pricing = () => {
         <FiHome className="mb-2 text-xl text-indigo-300" />
         <span className="text-xs">Laptops</span>
       </a>
+
+      <div onClick={()=> {navigate(`/productlist/Desktops`)}}>
       <a
-        href="#"
+        // href="#"
         className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
       >
         <FiBarChart2 className="mb-2 text-xl text-indigo-300" />
         <span className="text-xs">Desktops</span>
       </a>
+      </div>
+
+
+
       <a
         href="#"
         className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
@@ -369,36 +382,49 @@ const Pricing = () => {
 };
 
 const Shop = () => {
+  const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-4 gap-4 divide-x divide-neutral-700">
+    <div className="grid grid-cols-3 gap-3 divide-x divide-neutral-700">
+      <div onClick={()=> {navigate(`/productlist/Laptop`)}}>
+
       <a
-        href="#"
+        // href="#"
         className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
       >
         <FiHome className="mb-2 text-xl text-indigo-300" />
         <span className="text-xs">Laptops</span>
       </a>
+      </div>
+
+
+      <div onClick={()=> {navigate(`/productlist/Desktops`)}}>
       <a
-        href="#"
+        // href="#"
         className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
       >
         <FiBarChart2 className="mb-2 text-xl text-indigo-300" />
         <span className="text-xs">Desktops</span>
       </a>
+      </div>
+
+      <div onClick={()=> {navigate(`/productlist/Printer`)}}>
+
+
       <a
-        href="#"
+        // href="#"
         className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
       >
         <FiPieChart className="mb-2 text-xl text-indigo-300" />
         <span className="text-xs">Printers</span>
       </a>
-      <a
+      </div>
+      {/* <a
         href="#"
         className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
       >
         <FiPieChart className="mb-2 text-xl text-indigo-300" />
         <span className="text-xs">Accesories</span>
-      </a>
+      </a> */}
     </div>
   );
 };
@@ -445,41 +471,69 @@ const Aboutus = () => {
       <div>
         <a href="#">
           <img
-            className="mb-2 h-14 w-full rounded object-cover"
-            src="/imgs/blog/4.png"
+            className="mb-2 h-50 w-full rounded object-cover"
+            src={Veda}
             alt="Placeholder image"
           />
-          <h4 className="mb-0.5 text-sm font-medium">Lorem ipsum dolor</h4>
+          <h4 className="mb-0.5 text-sm font-medium">Vedabyte</h4>
           <p className="text-xs text-neutral-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet illo
-            quidem eos.
+          At Vedabyte, we are committed to providing our customers with the best deals electronic devices, including second-hand laptops and refurbished laptops.
           </p>
         </a>
       </div>
-      <button className="ml-auto mt-4 flex items-center gap-1 text-sm text-indigo-300">
+      {/* <button className="ml-auto mt-4 flex items-center gap-1 text-sm text-indigo-300">
         <span>View more</span>
         <FiArrowRight />
-      </button>
+      </button> */}
+    </div>
+  );
+};
+
+const Contactus = () => {
+  return (
+    <div>
+      <div>
+        <a href="#">
+          <img
+            className="mb-2  w-full rounded object-cover"
+            src={Contact}
+            alt="Placeholder image"
+          />
+          {/* <h4 className="mb-0.5 text-sm font-medium">Lorem ipsum dolor</h4>
+          <p className="text-xs text-neutral-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet illo
+            quidem eos.
+          </p> */}
+        </a>
+      </div>
+      {/* <button className="ml-auto mt-4 flex items-center gap-1 text-sm text-indigo-300">
+        <span>View more</span>
+        <FiArrowRight />
+      </button> */}
     </div>
   );
 };
 
 const TABS = [
-  {
-    title: "Bestsellers",
-    // Component: Products,
-    Component: Pricing,
-  },
+  // {
+  //   title: "Bestsellers",
+  //   // Component: Products,
+  //   Component: Pricing,
+  // },
   {
     title: "Shop",
     Component: Shop,
   },
-  {
-    title: "Blog",
-    Component: Blog,
-  },
+  // {
+  //   title: "Blog",
+  //   Component: Blog,
+  // },
   {
     title: "About Us",
     Component: Aboutus,
+  },
+  {
+    title: "Contact Us",
+    Component: Contactus,
   },
 ].map((n, idx) => ({ ...n, id: idx + 1 }));

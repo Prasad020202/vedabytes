@@ -13,8 +13,9 @@ import { addToCart, deleteItem } from "../../redux/orebiSlice";
 import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
+  
   width: 300px;
-  height: 500px;
+  height: 450px;
   background: white;
   margin: auto;
   position: relative;
@@ -33,10 +34,14 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  /* background-color: #9b2847; */
+  
 
   .top {
-    height: 80%;
+    height: 65%;
     width: 100%;
+    padding: 4%;
+    
     background: url("../../assets/product/macbook.jpg") no-repeat center center;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -46,7 +51,7 @@ const Container = styled.div`
 
   .bottom {
     width: 200%;
-    height: 20%;
+    height: 100%;
     transition: transform 0.5s;
 
     &.clicked {
@@ -274,7 +279,7 @@ const Product = (props, { item }) => {
   return (
     <Wrapper>
       <Container>
-        <div className="top"  onClick={handleProductDetails}>
+        <div className="top "  onClick={handleProductDetails} >
           <img src={props.img} />
         </div>
         <div className={`bottom ${isBuyClicked ? "clicked" : ""}`}>

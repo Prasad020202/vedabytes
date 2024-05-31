@@ -10,12 +10,27 @@ import mac from "../Productscards/macbook.jpg";
 import Product from "../Bestsellers/Product";
 import MyContext from "../../Context/MyContext";
 import { useParams } from "react-router-dom";
+import Itemdrop from "../Navbar/ShiftingDropDown.jsx"
+import Pic from "../../assets/Driver.png"
 
 const Maindiv = styled.div`
   /* background-color: aqua; */
   min-height: fit-content;
   overflow: hidden;
 `;
+const Navcont=styled.div`
+z-index: 11;
+margin: 15px 0;
+
+  
+
+  position: sticky;
+  top: 0;
+  background-color: white;
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
+  
+  
+`
 
 const Shop = () => {
 
@@ -35,33 +50,54 @@ const Shop = () => {
 
   return (
     <>
-      <Nav />
-      <div className="w-full h-[35vh]  mt-3 bg-slate-200">
+      {/* <Nav /> */}
+
+      <Navcont>
+      {/* <Navbar handleOrderPopup={handleOrderPopup} /> */}
+      <Itemdrop/>
+    </Navcont>
+      <div className="w-full h-[50vh]  mt-3 ">
         {/* <Slidercomp/> */}
+        <img className="w-full" src= {Pic} alt="no img" />
       </div>
 
       <Maindiv className="max-w-container mx-auto px-4  ">
         {/* <div className=""><Breadcrumbs title="Products" /></div> */}
 
         {/* ================= Products Start here =================== */}
-        <div className="w-full h-full flex pb-20 gap-10 ">
+
+
+        <div className="w-full h-full flex flex-col pb-20 px-7">
           {/* <div className="w-[20%] lgl:w-[25%] hidden mdl:inline-flex h-full"> */}
-          <div className="w-[20%] lgl:w-[25%] mdl:inline-flex h-full">
+          <div className="w-[15%] lgl:w-[25%] mdl:inline-flex h-full">
             <div className="">
+
+
               <Breadcrumbs title="Products" />
+
+
             </div>
 
-            <ShopSideNav />
-          </div>
-          <div className=" w-3/4 mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10  mt-14">
-            <ProductBanner itemsPerPageFromBanner={itemsPerPageFromBanner} />
+            {/* <ShopSideNav /> */}
 
-          <div className=" flex flex-row flex-shrink">
+
+          </div>
+          <div className="  w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10 mt-10  overflow-hidden">
+
+
+
+            {/* <ProductBanner itemsPerPageFromBanner={itemsPerPageFromBanner} /> */}
+
+
+
+
+
+          <div className=" flex flex-wrap ">
           {filteredProducts.slice(0, 8).map((item, index) => {
           const { id, Brand, Description, Price, Product_Name, thumbnail_img } =
             item;
           return (
-            <div>
+            <div className="p-3">
               <Product
                 _id={id}
                 img={thumbnail_img}

@@ -34,6 +34,8 @@ const Navcont=styled.div`
 z-index: 11;
 margin: 15px 0;
 
+
+
   
 
   position: sticky;
@@ -42,6 +44,11 @@ margin: 15px 0;
   /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
   
   
+`
+const Productdiv=styled.div`
+/* background-color: aqua; */
+max-height: 450px;
+overflow: hidden;
 `
 
 const BannerData = {
@@ -83,11 +90,11 @@ const BannerData = {
   };
 
 const Landing = () => {
-    const [orderPopup, setOrderPopup] = React.useState(true);
+    // const [orderPopup, setOrderPopup] = React.useState(true);
 
-    const handleOrderPopup = () => {
-      setOrderPopup(!orderPopup);
-    };
+    // const handleOrderPopup = () => {
+    //   setOrderPopup(!orderPopup);
+    // };
   
     React.useEffect(() => {
       AOS.init({
@@ -110,11 +117,11 @@ const Landing = () => {
       <Itemdrop/>
     </Navcont>
 
-    <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
+    {/* <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} /> */}
 
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
     
-    <Hero handleOrderPopup={handleOrderPopup} />
+    <Hero  />
     <Category />
     {/* <Category2 /> */}
     <Services />
@@ -122,9 +129,12 @@ const Landing = () => {
     {/* <Products /> */}
     {/* <ProductCard/> */}
 
+    <Productdiv>
+
 
 
     <Lappy/>
+    </Productdiv>
 
     <Banner data={BannerData2} />
     {/* <Products /> */}
@@ -132,21 +142,25 @@ const Landing = () => {
 
 
 
-
+    <Productdiv>
     <Print/>
+    </Productdiv>
+    
 
     <Banner data={BannerData3} />
     {/* <Products /> */}
     {/* <ProductCard/> */}
+    <Productdiv>
 
     <Desktops/>
+    </Productdiv>
     
     <Partners />
     <Blogs />
     {/* <Test/> */}
     <Footer />
     {/* {name} */}
-    <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} />
+    {/* <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup} /> */}
   </div>
   </>
   )
